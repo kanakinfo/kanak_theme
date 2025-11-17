@@ -23,6 +23,11 @@ pre-commit install
 
 Pre-commit is configured to use the following tools for checking and formatting your code:
 
+in feture request
+1] filter display direct by user list view
+2] quick entry show list view
+
+
 - ruff
 - eslint
 - prettier

@@ -83,7 +83,7 @@ app_include_js = "kanak_theme.bundle.js"
 # ------------
 
 # before_install = "kanak_theme.install.before_install"
-# after_install = "kanak_theme.install.after_install"
+after_install = "kanak_theme.install.after_install"
 
 # Uninstallation
 # ------------

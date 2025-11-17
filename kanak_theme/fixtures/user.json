@@ -1,0 +1,12 @@
+[{
+    "doctype": "Custom Field",
+    "dt": "User",
+    "module": "Kanak Theme",
+    "description": "Select theme to apply",
+    "name": "User-theme",
+    "fieldname": "theme",
+    "fieldtype": "Link",
+    "options": "Themes",
+    "label": "Theme",
+    "insert_after": "desk_theme"
+}]

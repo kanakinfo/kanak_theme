@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme-mode="{{ desk_theme.lower() }}" data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}">
+<html data-theme-mode="{{ desk_theme.lower() }}" data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}" data-list-style="{{list_style}}" data-form-style="{{form_style}}">
 	<head>
 		<meta charset="UTF-8">
 		<!-- Chrome, Firefox OS and Opera -->
@@ -24,7 +24,16 @@
 		{% for include in include_css -%}
 		{{ include_style(include) }}
 		{%- endfor -%}
-
+		{% if kanak_theme %}
+		<style>
+		    :root {
+		        {% for key, val in theme_list.items() %}
+		            --{{ key }}: {{ val }};
+		        {% endfor %}
+		    }
+		       
+		</style>
+{% endif %}
 		{% if lang == "eo" %}
 		<script type="text/javascript">
 			var _jipt = [];

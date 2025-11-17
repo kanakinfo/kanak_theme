@@ -1,5 +1,6 @@
 if (!window.frappe) window.frappe = {};
 frappe.provide("frappe.ui.form");
+frappe.provide("frappe.views");
 frappe.after_ajax(() => {
     const sidebarEl = $(".sidebar.theme_sidebar");
     sidebarEl.off('mouseover.theme').on('mouseover.theme', () => {
@@ -75,3 +76,60 @@ frappe.ui.form.ControlCheck = class ControlCheckToggle extends frappe.ui.form.Co
         this.set_mandatory(value);
     }
 };
+
+const super_setup_list_wrapper = frappe.views.BaseList.prototype.setup_list_wrapper;
+frappe.views.BaseList.prototype.setup_list_wrapper = function(){
+    this.$custom_filter_bar = $(`
+            <div class="custom-filter-bar"></div>
+        `).appendTo(this.page.main);
+       super_setup_list_wrapper.call(this);
+       this.setup_custom_filter_events();
+};
+frappe.views.BaseList.prototype.setup_custom_filter_events = function () {
+    let me = this;
+    const super_refresh = this.refresh;
+    this.refresh = function () {
+        super_refresh.apply(this, arguments);
+        me.render_filter_tags();
+    };
+    this.render_filter_tags();
+};
+
+frappe.views.BaseList.prototype.render_filter_tags = function () {
+    let me = this;
+
+    if (!this.$custom_filter_bar) return;
+    this.$custom_filter_bar.empty();
+
+    let filters = this.filter_area?.filter_list?.filters;
+    if (!filters || filters.length === 0) {
+        this.$custom_filter_bar.hide();
+        return;
+    }
+    this.$custom_filter_bar.show();
+
+    filters.forEach((f, i) => {
+        let label = f.get_filter_button_text();
+
+        const filter_tag = $(`
+            <div class="filter-custom-tag">
+                <span class="filter-label">${label}</span>
+                <span class="remove-filter" data-filter-index="${i}">×</span>
+            </div>
+        `);
+
+        filter_tag.find('.remove-filter').on('click', (ev) => {
+            let index = $(ev.currentTarget).data('filter-index');
+            let flt = me.filter_area.filter_list.filters[index];
+            if (!flt) return;
+
+            flt.remove();
+            me.filter_area.filter_list.apply();
+        });
+
+        me.$custom_filter_bar.append(filter_tag);
+    });
+};
+
+
+
