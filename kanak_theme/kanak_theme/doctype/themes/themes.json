@@ -17,7 +17,9 @@
   "sidebar_hover_color",
   "sidebar_font_color",
   "list_style",
-  "font_family"
+  "font_family",
+  "menu_settings_section",
+  "table_mogv"
  ],
  "fields": [
   {
@@ -96,12 +98,22 @@
    "fieldtype": "Select",
    "label": "Font Family",
    "options": "\nInter\nPoppins\nRubik\nOutfit\nUrbanist\nNunito\ncursive\nRoboto Condensed"
+  },
+  {
+   "fieldname": "menu_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Menu Settings"
+  },
+  {
+   "fieldname": "table_mogv",
+   "fieldtype": "Table",
+   "options": "Theme Menu"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-17 15:34:42.703410",
+ "modified": "2025-11-18 16:00:07.855573",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

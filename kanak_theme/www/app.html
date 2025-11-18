@@ -57,47 +57,74 @@
 			      <span class="logo_name ml-3 mt-2">{{company_name}}</span>
 			    </div>
 			    <ul class="nav-links">
-			    	{% for ws in allowed_workspaces if not ws.parent_page %}
-				     <li>
-				     	{% set children = allowed_workspaces | selectattr("parent_page", "equalto", ws.name) | list %}
-				     	{% if not children %}
-				     	<a href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">
-				     	  <span class="sidebar-item-icon">
-						    <svg class="icon icon-md">
-								<use href="#icon-{{ws.icon}}"></use>
-							</svg>
-						  </span>
-				          <span class="link_name">{{ _(ws.title) }}</span>
-				        </a>
-				        <ul class="sub-menu blank">
-				          <li><a class="link_name" href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">{{ _(ws.title) }}</a></li>
-				        </ul>
-				        {% endif %}
-				        {% if children %}
-				     	<div class="iocn-link">
-				          <a href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">
-				          	<span class="sidebar-item-icon">
-							    <svg class="icon icon-md">
-									<use href="#icon-{{ws.icon}}"></use>
-								</svg>
-							</span>
-				            <span class="link_name">{{ _(ws.title) }}</span>
-				          </a>
-				          <i class='fa fa-chevron-down arrow'></i>
-				        </div>
-				        <ul class="sub-menu">
-				          <li>
-				          	<a class="link_name" href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">{{ _(ws.title) }}</a>
-				          </li>
-				          {% for ms in children if not ws.parent_page %}
-				          	<li><a href="/app/{% if ms.public %}{{ ms.title|lower|replace(' ', '-') }}{% else %}private/{{ ms.title|lower|replace(' ', '-') }}{% endif %}">{{ _(ms.title) }}</a></li>
-				      	  {% endfor %} 
-				        </ul>
-				        {% endif %}
-				 	</li>
+				    {% for ws in allowed_workspaces if not ws.parent_page %}
+				        <li>
+				            {% set children = allowed_workspaces | selectattr("parent_page", "equalto", ws.name) | list %}
 
-				 	{% endfor %} 
-			    </ul>
+				            {# ---- Function to print icon/image ---- #}
+				            {% macro workspace_icon(ws) %}
+				                {% if ws.image %}
+				                    <span class="sidebar-item-icon">
+				                        <img src="{{ ws.image }}" 
+				                             class="workspace-image-icon"
+				                             >
+				                    </span>
+				                {% elif ws.icon %}
+				                    <span class="sidebar-item-icon">
+				                        <svg class="icon icon-md">
+				                            <use href="#icon-{{ ws.icon }}"></use>
+				                        </svg>
+				                    </span>
+				                {% endif %}
+				            {% endmacro %}
+
+				            {% if not children %}
+				            <a href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">
+				                {{ workspace_icon(ws) }}
+				                <span class="link_name">{{ _(ws.title) }}</span>
+				            </a>
+
+				            <ul class="sub-menu blank">
+				                <li>
+				                    <a class="link_name" href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">
+				                        {{ _(ws.title) }}
+				                    </a>
+				                </li>
+				            </ul>
+				            {% endif %}
+
+				            {% if children %}
+				            <div class="iocn-link">
+				                <a href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">
+				                    {{ workspace_icon(ws) }}
+				                    <span class="link_name">{{ _(ws.title) }}</span>
+				                </a>
+				                <i class='fa fa-chevron-down arrow'></i>
+				            </div>
+
+				            <ul class="sub-menu">
+				                <li>
+				                    <a class="link_name" href="/app/{% if ws.public %}{{ ws.title|lower|replace(' ', '-') }}{% else %}private/{{ ws.title|lower|replace(' ', '-') }}{% endif %}">
+				                        {{ _(ws.title) }}
+				                    </a>
+				                </li>
+
+				                {% for ms in children if not ws.parent_page %}
+				                <li>
+				                	<div class="d-flex siedebar_icon_mgn">
+					                	{{ workspace_icon(ms) }}
+					                    <a href="/app/{% if ms.public %}{{ ms.title|lower|replace(' ', '-') }}{% else %}private/{{ ms.title|lower|replace(' ', '-') }}{% endif %}">
+
+					                        {{ _(ms.title) }}
+					                    </a>
+				                	</div>
+				                </li>
+				                {% endfor %}
+				            </ul>
+				            {% endif %}
+				        </li>
+				    {% endfor %}
+				</ul>
 			  </div>
 			<div class="theme_section_main">
 				<header></header>

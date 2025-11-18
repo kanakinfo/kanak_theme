@@ -59,6 +59,50 @@ def generate_shadow_color(primary_hex):
     return gray_hex, rgba
 
 
+def apply_theme_menu(theme_doc, allowed_workspaces):
+    """
+    Apply Theme Menu settings to workspace list.
+    theme_doc = Theme doctype (doc)
+    allowed_workspaces = list of workspace dicts
+    """
+
+    theme_rows = theme_doc.table_mogv or []
+
+    # Convert Theme Menu table → Lookup dictionary
+    theme_map = {
+        row.menu: {
+            "use_image": row.use_image_as_icon,
+            "icon": row.icon,
+            "image": row.image_icon
+        }
+        for row in theme_rows
+    }
+
+    # Modify allowed workspaces in-place
+    for ws in allowed_workspaces:
+        ws_name = ws.get("name")
+        cfg = theme_map.get(ws_name)
+
+        if not cfg:
+            continue
+
+        # (1) Use Image First Priority
+        if cfg["use_image"] and cfg["image"]:
+            ws["image"] = cfg["image"]
+            ws["icon"] = None
+            continue
+
+        # (2) Use Icon
+        if cfg["icon"]:
+            ws["icon"] = cfg["icon"]
+            ws["image"] = None
+            continue
+
+        # (3) Default → keep original
+
+    return allowed_workspaces
+
+
 def get_context(context):
     context = app.get_context(context)
     boot = frappe.sessions.get()
@@ -72,6 +116,7 @@ def get_context(context):
         except frappe.DoesNotExistError:
             pass
     theme = get_active_theme()
+    allowed_workspaces = apply_theme_menu(theme, allowed_workspaces)
     primary_color = theme.as_dict().primary_color
     background_color = theme.as_dict().background_color
     shadow_hex, shadow_rgba = generate_shadow_color(primary_color)

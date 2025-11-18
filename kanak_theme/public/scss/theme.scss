@@ -25,7 +25,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   color: var(--primary);
 }
 .es-icon{
-  stroke:var(--primary);
+  --icon-stroke:var(--primary);
+}
+.icon{
+  --icon-stroke:var(--primary);
 }
 .theme_section_main{
 	    margin-left: 78px;
@@ -39,6 +42,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 }
 .list-sidebar .list-filters input:not([data-fieldtype=Check]){
    background: var(--control-bg);
+}
+.quick-form-wrapper{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.point-of-sale-app .checkout-btn, .point-of-sale-app .submit-order-btn{
+  background-color: var(--primary) !important;
+}
+.point-of-sale-app > .past-order-summary > .invoice-summary-wrapper > .abs-container > .summary-btns > .new-btn{
+  background-color: var(--primary) !important;
 }
 // .es-icon{
 //   stroke:var(--primary);
@@ -177,11 +190,29 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     cursor: pointer;
     transition: all 0.3s ease;
     svg{
-      fill:var(--side_font_color);
+      fill:transparent;
       stroke: var(--side_font_color);
+      --icon-stroke: var(--side_font_color);
       height: 22px;
       width: 22px;
     }
+    img.workspace-image-icon{
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+    }
+  }
+  .sidebar .nav-links li .siedebar_icon_mgn{
+      gap: 5px;
+      .sidebar-item-icon{
+        width: 22px;
+        min-width: auto;
+        *{
+          width: 22px;
+          min-width: auto;
+        }
+        
+      }
   }
   .sidebar .nav-links li.showMenu i.arrow{
     transform: rotate(-180deg);
@@ -460,7 +491,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   }
 }
 [data-form-style='APPLE CLEAN UI']{
-  .page-form {
+  .form-page {
     .form-control {
         background: #ffffff !important;
         border: 1px solid #dcdcdc !important;
@@ -616,4 +647,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 .filter-custom-tag .remove-filter:hover {
     background: #ffe5e5;
     color: #b71c1c;
+}
+.widget.links-widget-box{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
