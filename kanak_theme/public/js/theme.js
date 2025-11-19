@@ -83,8 +83,21 @@ frappe.views.BaseList.prototype.setup_list_wrapper = function(){
     this.$custom_filter_bar = $(`
             <div class="custom-filter-bar"></div>
         `).appendTo(this.page.main);
+    // this.$group_filter_bar = $(`
+    //         <div class="custom-group-bar"></div>
+    //     `).appendTo(this.page.main);
        super_setup_list_wrapper.call(this);
+       // this.setup_custom_group_events();
        this.setup_custom_filter_events();
+};
+frappe.views.BaseList.prototype.setup_custom_group_events = function () {
+    let me = this;
+    const super_refresh = this.refresh;
+    this.refresh = function () {
+        super_refresh.apply(this, arguments);
+        me.render_levels();
+    };
+    this.render_levels();
 };
 frappe.views.BaseList.prototype.setup_custom_filter_events = function () {
     let me = this;
@@ -252,8 +265,13 @@ frappe.views.ListView.prototype.show_quick_form_under_row = function (row, docna
 const super_render = frappe.views.ListView.prototype.render;
 frappe.views.ListView.prototype.render = function () {
     this._element_factory.templates.quick = create_quick_element(this.doctype);
-    super_render.call(this);
+    if (this.is_grouped) {
+        this.render_grouped_list();
+    } else {
+        super_render.call(this);
+    }
     this.add_quick_icon_events();
+    // this.bind_group_header_toggle();
 };
 frappe.views.ListView.prototype.add_quick_icon_events = function () {
     let me = this;
@@ -293,6 +311,188 @@ frappe.ui.form.on("Themes", {
         }, 600);
     }
 });
+const old_init = frappe.views.ListView.prototype.init;
+frappe.views.ListView.prototype.init = function () {
+    if (!this.group_levels) {
+        this.group_levels = [];
+    }
+    return old_init.call(this);
+};
+
+frappe.views.ListView.prototype.render_group_by_options = function() {
+    let fields = this.meta.fields || [];
+
+    let select = this.$group_by_panel.find(".group-field");
+    select.empty();
+    select.append(`<option value="" disabled selected>Group By</option>`);
+    const allowed_types = ["Data", "Select", "Link", "Int", "Date"];
+    fields
+      .filter(df => allowed_types.includes(df.fieldtype))
+      .forEach(df => {
+          select.append(`<option value="${df.fieldname}">${df.label}</option>`);
+      });
+};
+frappe.views.ListView.prototype.bind_group_by_events = function () {
+    this.$group_by_panel.on("click", ".add-level", () => {
+        let selected = this.$group_by_panel.find(".group-field").val();
+        if (!selected) return;
+        if (this.group_levels.includes(selected)) return;
+        this.group_levels.push(selected);
+        this.render_levels();
+        this.refresh_grouped_list();
+    });
+};
+frappe.views.ListView.prototype.get_label_by_fieldname = function(fieldname) {
+    const df = this.meta.fields.find(f => f.fieldname === fieldname);
+    return df ? df.label : fieldname; // fallback
+};
+frappe.views.ListView.prototype.render_levels = function () {
+    const container = this.$page.find(".custom-group-bar");
+    if(container.length){
+        let levelsdatas = this.group_levels?this.group_levels.length: 0;
+        container.empty();
+        if(!levelsdatas){
+            this.$page.find(".custom-group-bar").hide();
+            return;
+        }else{
+            this.$page.find(".custom-group-bar").show();
+        }
+    }
+    
+    this.group_levels.forEach((lvl, index) => {
+        let label = this.get_label_by_fieldname(lvl);
+        container.append(`
+            <div class="group-custom-tag">
+                <span class="group-label">${label}</span>
+                <span class="remove-group" data-index="${index}">×</span>
+            </div>
+        `);
+    });
+    container.on("click", ".remove-group", (e) => {
+        let i = $(e.currentTarget).data("index");
+        this.group_levels.splice(i, 1);
+        this.render_levels();
+        this.refresh_grouped_list();
+    });
+};
+frappe.views.ListView.prototype.refresh_grouped_list = function () {
+    this.refresh();
+};
+const super_before_render = frappe.views.ListView.prototype.before_render;
+frappe.views.ListView.prototype.before_render =function(){
+    super_before_render.call(this);
+    if(this.view_name == 'List'){
+        const container = this.$page.find(".custom-group-bar");
+        if(!container.length){
+            this.$group_filter_bar = $(`
+            <div class="custom-group-bar"></div>
+            `).prependTo(this.page.main);
+            this.$page.find('.page-form').after(this.$group_filter_bar);
+            this.setup_custom_group_events();
+        }
+        const xgroupbycontainer = this.$page.find(".group-by-panel");
+        if(!xgroupbycontainer.length){
+            this.$group_by_panel = $(`
+                <div class="group-by-panel">
+                    <select class="group-field form-control" style="width:100px">
+                    </select>
+                    <button class="btn btn-sm btn-primary add-level">+</button>
+                </div>
+            `);
+            this.$group_by_panel.prependTo(this.$page.find('.page-form .filter-section'));
+            
+            this.render_group_by_options();
+            this.bind_group_by_events();
+        }
+    }else{
+        $(".custom-group-bar").remove();
+        $(".group-by-panel").remove();
+    }
+};
+frappe.views.ListView.prototype.get_group_by = function () {
+    return this.group_levels.length ? this.group_levels.join(",") : null;
+};
+const old_get_call_args = frappe.views.ListView.prototype.get_call_args;
+frappe.views.ListView.prototype.get_call_args = function () {
+    let args = old_get_call_args.call(this);
+    if (args.args && args.args.view === "List") {
+        if (this.group_levels.length) {
+            args.args['group_by'] = this.group_levels.join(",");
+        }
+        args['method'] = "kanak_theme.kanak_theme.api.api.grouped_list";
+    }
+    return args;
+};
+
+const super_prepare_data = frappe.views.BaseList.prototype.prepare_data;
+frappe.views.BaseList.prototype.prepare_data = function(r){
+        let msg = r.message;
+        if (msg.is_grouped) {
+            this.is_grouped = true;
+            this.group_data = msg.groups;
+            return;
+        }else{
+            this.$result.empty();
+            this.is_grouped = false;
+        }
+        super_prepare_data.call(this, r);
+};
+const old_render_list = frappe.views.ListView.prototype.render_list;
+frappe.views.ListView.prototype.render_list = function () {
+    if (this.is_grouped) {
+        this.render_grouped_list();
+    } else {
+        old_render_list.call(this);
+    }
+};
+frappe.views.ListView.prototype.render_grouped_list = function () {
+    this.$result.empty();
+
+    if (!this.group_data || !this.group_data.length) {
+        this.$result.append(`<div class="text-muted mt-4">No records found</div>`);
+        return;
+    }
+
+    this.render_group_nodes(this.group_data, 0, this.$result);
+};
+frappe.views.ListView.prototype.render_group_nodes = function (nodes, level, container) {
+    let me = this;
+
+    nodes.forEach((node) => {
+        let header = $(`
+            <div class="group-header knk-group-header-cl group-level-${level}">
+                <span class="arrow" style="margin-right:8px;">▶</span>
+                ${node.group} <span class="text-muted ml-2">(${node.total})</span>
+            </div>
+        `);
+
+        container.append(header);
+        let wrapper = $(`<div class="group-wrapper" style="display:none; margin-left:${20 + level * 15}px;"></div>`);
+        container.append(wrapper);
+        if (node.children.length && node.children[0].is_child_group) {
+            this.render_group_nodes(node.children, level + 1, wrapper);
+        }
+        else {
+            node.children.forEach(doc => {
+                wrapper.append(me.render_grouped_row(doc));
+            });
+        }
+        header.on("click", function () {
+            let arrow = $(this).find(".arrow");
+
+            if (wrapper.is(":visible")) {
+                wrapper.slideUp(120);
+                arrow.text("▶");
+            } else {
+                wrapper.slideDown(120);
+                arrow.text("▼");
+            }
+        });
+    });
+};
+frappe.views.ListView.prototype.render_grouped_row = function (doc) {
+    return this.get_list_row_html(doc);
+};
 
 
 

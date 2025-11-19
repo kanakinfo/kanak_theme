@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       }
 }
 .list-subject a{
-  color: var(--primary);
+  color: var(--list_subject_color);
 }
 .list-sidebar .list-filters input:not([data-fieldtype=Check]){
    background: var(--control-bg);
@@ -605,7 +605,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 }
 
 /* ---- Filter Bar ---- */
-.custom-filter-bar {
+.custom-filter-bar, .custom-group-bar {
     padding: 10px 14px;
     border-bottom: 1px solid #e2e8f0;
     display: flex;
@@ -616,7 +616,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 }
 
 /* ---- Filter Tag ---- */
-.filter-custom-tag {
+.filter-custom-tag, .group-custom-tag{
     display: flex;
     align-items: center;
     gap: 6px;
@@ -629,14 +629,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     color: black;
     transition: all 0.2s ease-in-out;
 }
-.filter-custom-tag:hover {
+.filter-custom-tag:hover, .group-custom-tag:hover {
     background: var(--switch-bg);
     border-color: var(--primary);
 }
-.filter-custom-tag .filter-label {
+.filter-custom-tag .filter-label, .group-custom-tag .group-label {
     white-space: nowrap;
 }
-.filter-custom-tag .remove-filter {
+.filter-custom-tag .remove-filter, .group-custom-tag .remove-group {
     cursor: pointer;
     font-weight: bold;
     color: #d32f2f;
@@ -644,10 +644,30 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     border-radius: 50%;
     transition: background 0.2s ease-in-out, color 0.2s;
 }
-.filter-custom-tag .remove-filter:hover {
+.filter-custom-tag .remove-filter:hover, .group-custom-tag .remove-group:hover {
     background: #ffe5e5;
     color: #b71c1c;
 }
 .widget.links-widget-box{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.group-by-panel{
+    display: flex;
+    align-items: baseline;
+    margin-top: 5px;
+}
+.knk-group-header-cl{
+    cursor:pointer; 
+    margin-top:8px; 
+    margin-bottom:4px;
+    padding:7px 12px; 
+    background: var(--group_by_background_color);
+    color: var(--group_by_font_color);
+    border-radius:4px;
+    font-weight:600; 
+    display:flex; 
+    align-items:center;
+    .text-muted{
+      color: var(--group_by_font_color) !important;
+    }
 }

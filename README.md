@@ -26,7 +26,10 @@ Pre-commit is configured to use the following tools for checking and formatting 
 in feture request
 1] filter display direct by user list view
 2] quick entry show list view
-
+3] side bar icon changes
+4] sticky list bar 
+5] button style diffrents
+6] group by list view 
 
 - ruff
 - eslint

@@ -11,12 +11,17 @@
   "primary_color",
   "secondary_color",
   "background_color",
-  "form_style",
+  "list_subject_color",
   "column_break_svwx",
   "sidebar_background_color",
   "sidebar_hover_color",
   "sidebar_font_color",
+  "group_by_background_color",
+  "group_by_font_color",
+  "styles_section",
+  "form_style",
   "list_style",
+  "column_break_tbwa",
   "font_family",
   "menu_settings_section",
   "table_mogv"
@@ -62,6 +67,7 @@
    "reqd": 1
   },
   {
+   "default": "#212136",
    "fieldname": "sidebar_hover_color",
    "fieldtype": "Color",
    "label": "Sidebar Hover Color",
@@ -108,12 +114,41 @@
    "fieldname": "table_mogv",
    "fieldtype": "Table",
    "options": "Theme Menu"
+  },
+  {
+   "default": "#a3a3c2",
+   "fieldname": "group_by_background_color",
+   "fieldtype": "Color",
+   "label": "Group By background Color",
+   "reqd": 1
+  },
+  {
+   "default": "#FFFFFF",
+   "fieldname": "group_by_font_color",
+   "fieldtype": "Color",
+   "label": "Group By Font Color"
+  },
+  {
+   "fieldname": "styles_section",
+   "fieldtype": "Section Break",
+   "label": "Styles"
+  },
+  {
+   "fieldname": "column_break_tbwa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#00000",
+   "fieldname": "list_subject_color",
+   "fieldtype": "Color",
+   "label": "List Subject Color",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-18 16:00:07.855573",
+ "modified": "2025-11-19 17:31:27.706154",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

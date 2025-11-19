@@ -138,6 +138,9 @@ def get_context(context):
         "side_bg_color": theme.as_dict().sidebar_background_color,
         "side_hover_color": theme.as_dict().sidebar_hover_color,
         "side_font_color": theme.as_dict().sidebar_font_color,
+        "group_by_background_color": theme.as_dict().group_by_background_color,
+        "group_by_font_color": theme.as_dict().group_by_font_color,
+        "list_subject_color": theme.as_dict().list_subject_color,
         "font-family-style": theme.as_dict().font_family or 'Inter'
 
     }
