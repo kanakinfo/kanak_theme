@@ -13,6 +13,23 @@ def hex_to_rgba(hex_color, alpha):
     b = int(hex_color[4:6], 16)
     return f"rgba({r},{g},{b},{alpha})"
 
+
+def invert_color(hex_color):
+    """
+    Invert a HEX color (same logic as JS invertColor function)
+    Example: #3498db → #cb6734
+    """
+    hex_color = hex_color.lstrip('#')
+
+    # Extract RGB
+    r = 255 - int(hex_color[0:2], 16)
+    g = 255 - int(hex_color[2:4], 16)
+    b = 255 - int(hex_color[4:6], 16)
+
+    # Convert back to HEX
+    return "#{:02x}{:02x}{:02x}".format(r, g, b)
+
+
 def adjust_color(hex_color, percentage):
     """
     Adjust color brightness.
@@ -118,7 +135,9 @@ def get_context(context):
     theme = get_active_theme()
     allowed_workspaces = apply_theme_menu(theme, allowed_workspaces)
     primary_color = theme.as_dict().primary_color
+    secondary_color = theme.as_dict().primary_color
     background_color = theme.as_dict().background_color
+    default_button_color = theme.as_dict().default_button_color
     shadow_hex, shadow_rgba = generate_shadow_color(primary_color)
     theme_list = {
         "primary": primary_color,
@@ -141,8 +160,19 @@ def get_context(context):
         "group_by_background_color": theme.as_dict().group_by_background_color,
         "group_by_font_color": theme.as_dict().group_by_font_color,
         "list_subject_color": theme.as_dict().list_subject_color,
-        "font-family-style": theme.as_dict().font_family or 'Inter'
-
+        "font-family-style": theme.as_dict().font_family or 'Inter',
+        "secondary_color": theme.as_dict().secondary_color,
+        "secondary_font_color": theme.as_dict().secondary_font_color,
+        "secondary_color_light": adjust_color(secondary_color, 50),
+        "secondary_color_light_70": adjust_color(secondary_color, 70),
+        "secondary_color_dark": adjust_color(secondary_color, -50),
+        "primary_color_light": adjust_color(primary_color, 50),
+        "primary_color_dark": adjust_color(primary_color, -50),
+        "default_color": theme.as_dict().default_button_color,
+        "default_font_color": theme.as_dict().default_button_font_color,
+        "default_color_light_70": adjust_color(default_button_color, 70),
+        "default_color_light": adjust_color(default_button_color, 50),
+        "default_color_dark": adjust_color(default_button_color, -50),
     }
 
     context.update({
@@ -152,7 +182,8 @@ def get_context(context):
         "kanak_theme": theme.as_dict() if theme else {},
         "theme_list": theme_list,
         "list_style": theme.as_dict().list_style,
-        "form_style": theme.as_dict().form_style
+        "form_style": theme.as_dict().form_style,
+        "button_style": theme.as_dict().button_style
     })
 
     return context

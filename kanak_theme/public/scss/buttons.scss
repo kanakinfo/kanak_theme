@@ -1,0 +1,395 @@
+button.btn.btn-primary{
+  svg{
+    --icon-stroke: white;
+  }
+}
+[data-button-style='Outline Button']{
+  button.btn.btn-default:not(.btn-paging){
+     background: transparent;
+     border:2px solid var(--default_color);
+     color:var(--default_color);
+     svg{
+        --icon-stroke: var(--default_color);
+     }
+  }
+  button.btn.btn-default:not(.btn-paging):active, button.btn.btn-default:not(.btn-paging):focus,
+  button.btn.btn-default:not(.btn-paging):hover{
+      background: color-mix(in srgb, var(--default_color) 20%, white);
+  }
+  button.btn.btn-secondary:not(.btn-paging){
+    background: transparent;
+    border:2px solid var(--secondary_color);
+    color:var(--secondary_color);
+  }
+  button.btn.btn-secondary:not(.btn-paging) svg {
+      --icon-stroke: var(--secondary_color);
+  }
+  button.btn.btn-secondary:not(.btn-paging):active,
+  button.btn.btn-secondary:not(.btn-paging):focus,
+  button.btn.btn-secondary:not(.btn-paging):hover{
+      background: color-mix(in srgb, var(--secondary_color) 20%, white);
+  }
+  button.btn.btn-secondary:not(.btn-paging):hover svg,
+  button.btn.btn-secondary:not(.btn-paging):focus svg,
+  button.btn.btn-secondary:not(.btn-paging):active svg {
+      --icon-stroke: var(--secondary_color) !important;
+  }
+
+  button.btn.btn-primary:not(.btn-paging){
+    background: transparent;
+    border:2px solid var(--primary);
+    color:var(--primary);
+    svg{
+        --icon-stroke: var(--primary);
+     }
+  }
+  button.btn.btn-primary:not(.btn-paging):active, button.btn.btn-primary:not(.btn-paging):focus,
+  button.btn.btn-primary:not(.btn-paging):hover{
+     background: color-mix(in srgb, var(--primary) 20%, white) !important;
+     svg{
+        --icon-stroke: var(--primary) !important;
+     }
+  }
+}
+
+[data-button-style='Flat Button']{
+  button.btn.btn-default:not(.btn-paging){
+     background: var(--default_color);
+     color: var(--default_font_color);
+     svg{
+        --icon-stroke: var(--default_font_color);
+     }
+  }
+  button.btn.btn-default:not(.btn-paging):active, button.btn.btn-default:not(.btn-paging):focus,
+  button.btn.btn-default:not(.btn-paging):hover{
+     background: var(--default_color) !important;
+     color: var(--default_font_color) !important;
+     svg{
+        --icon-stroke: var(--default_font_color) !important;
+     }
+  }
+  button.btn.btn-secondary:not(.btn-paging){
+    background: var(--secondary_color);
+      color: var(--secondary_font_color);
+  }
+  button.btn.btn-secondary:not(.btn-paging) svg {
+      --icon-stroke: var(--secondary_font_color);
+  }
+  button.btn.btn-secondary:not(.btn-paging):active,
+  button.btn.btn-secondary:not(.btn-paging):focus,
+  button.btn.btn-secondary:not(.btn-paging):hover{
+      background: var(--secondary_color) !important;
+      color: var(--secondary_font_color) !important;
+  }
+  button.btn.btn-secondary:not(.btn-paging):hover svg,
+  button.btn.btn-secondary:not(.btn-paging):focus svg,
+  button.btn.btn-secondary:not(.btn-paging):active svg {
+      --icon-stroke: var(--secondary_font_color) !important;
+  }
+  button.btn.btn-primary:not(.btn-paging){
+     background: var(--primary);
+     color: white;
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-primary:not(.btn-paging):active, button.btn.btn-primary:not(.btn-paging):focus,
+  button.btn.btn-primary:not(.btn-paging):hover{
+     background: var(--primary) !important;
+     color: white !important;
+     svg{
+        --icon-stroke: white !important;
+     }
+  }
+}
+
+[data-button-style='3D Button']{
+  button.btn.btn-default:not(.btn-paging){
+     background:linear-gradient(180deg,var(--default_color), color-mix(in srgb, var(--default_color) 20%, black));
+     color:white;
+     box-shadow:0 2px 0 color-mix(in srgb, var(--default_color) 40%, black) !important;
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-default:not(.btn-paging):active, button.btn.btn-default:not(.btn-paging):focus,
+  button.btn.btn-default:not(.btn-paging):hover{
+     background:linear-gradient(180deg,var(--default_color), color-mix(in srgb, var(--default_color) 20%, black));
+     color:white !important;
+     box-shadow:0 2px 0 color-mix(in srgb, var(--default_color) 20%, black) !important;
+     svg{
+        --icon-stroke: white;
+     } 
+  }
+  button.btn.btn-secondary:not(.btn-paging){
+    background:linear-gradient(180deg,var(--secondary_color), color-mix(in srgb, var(--secondary_color) 20%, black));
+     color:white !important;
+     box-shadow:0 2px 0 color-mix(in srgb, var(--secondary_color) 40%, black) !important;
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-secondary:not(.btn-paging) svg {
+      --icon-stroke: white;
+  }
+  button.btn.btn-secondary:not(.btn-paging):active,
+  button.btn.btn-secondary:not(.btn-paging):focus,
+  button.btn.btn-secondary:not(.btn-paging):hover{
+     background:linear-gradient(180deg,var(--secondary_color), color-mix(in srgb, var(--secondary_color) 20%, black));
+     color:white !important;
+     box-shadow:0 2px 0 color-mix(in srgb, var(--secondary_color) 20%, black) !important;
+  }
+  button.btn.btn-secondary:not(.btn-paging):hover svg,
+  button.btn.btn-secondary:not(.btn-paging):focus svg,
+  button.btn.btn-secondary:not(.btn-paging):active svg {
+      --icon-stroke: white !important;
+  }
+
+  button.btn.btn-primary:not(.btn-paging){
+    background:linear-gradient(180deg,var(--primary), color-mix(in srgb, var(--primary) 20%, black));
+     color:white !important;
+     box-shadow:0 2px 0 color-mix(in srgb, var(--primary) 40%, black) !important;
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-primary:not(.btn-paging):active, button.btn.btn-primary:not(.btn-paging):focus,
+  button.btn.btn-primary:not(.btn-paging):hover{
+     background:linear-gradient(180deg,var(--primary), color-mix(in srgb, var(--primary) 20%, black));
+     color:white !important;
+     box-shadow:0 2px 0 color-mix(in srgb, var(--primary) 20%, black) !important;
+     svg{
+        --icon-stroke: white !important;
+     }
+  }
+}
+
+[data-button-style='Gradient Button']{
+  button.btn.btn-default:not(.btn-paging){
+     background:linear-gradient(135deg,var(--default_color),color-mix(in srgb, var(--default_color) 80%, white));
+     color:white;
+     border-radius:50px;
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-default:not(.btn-paging):active, button.btn.btn-default:not(.btn-paging):focus,
+  button.btn.btn-default:not(.btn-paging):hover{
+     transform:scale(1.05);
+     color: white !important;
+     svg{
+        --icon-stroke: white ;
+     } 
+  }
+  button.btn.btn-secondary:not(.btn-paging){
+     background:linear-gradient(135deg,var(--secondary_color),color-mix(in srgb, var(--secondary_color) 80%, white));
+     color:white;
+     border-radius:50px;
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-secondary:not(.btn-paging) svg {
+      --icon-stroke: white;
+  }
+  button.btn.btn-secondary:not(.btn-paging):active,
+  button.btn.btn-secondary:not(.btn-paging):focus,
+  button.btn.btn-secondary:not(.btn-paging):hover{
+     color: white !important;
+     transform:scale(1.05);
+  }
+  button.btn.btn-secondary:not(.btn-paging):hover svg,
+  button.btn.btn-secondary:not(.btn-paging):focus svg,
+  button.btn.btn-secondary:not(.btn-paging):active svg {
+      --icon-stroke: white !important;
+  }
+
+  button.btn.btn-primary:not(.btn-paging){
+     background:linear-gradient(135deg,var(--primary),color-mix(in srgb, var(--primary) 80%, white));
+     color:white;
+     border-radius:50px;
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-primary:not(.btn-paging):active, button.btn.btn-primary:not(.btn-paging):focus,
+  button.btn.btn-primary:not(.btn-paging):hover{
+     transform:scale(1.05);
+     color:white;
+     svg{
+        --icon-stroke: white !important;
+     }
+  }
+}
+[data-button-style='Pill Rounded Button']{
+  button.btn.btn-default:not(.btn-paging){
+     background: var(--default_color);
+     color:white;
+     border-color: var(--default_color) !important;
+     border-radius:999px; 
+     svg{
+        --icon-stroke: white;
+     }
+  }
+  button.btn.btn-default:not(.btn-paging):active, button.btn.btn-default:not(.btn-paging):focus,
+  button.btn.btn-default:not(.btn-paging):hover{
+     background: var(--default_color) !important;
+     opacity:.8 !important;
+     color: white !important;
+     border-color: var(--default_color) !important;
+     border-radius:999px;
+     svg{
+        --icon-stroke: white ;
+     } 
+  }
+  button.btn.btn-secondary:not(.btn-paging){
+     background: var(--secondary_color);
+     color:white;
+     border-color: var(--secondary_color) !important;
+     border-radius:999px; 
+     svg{
+        --icon-stroke: white !important;
+     }
+  }
+  button.btn.btn-secondary:not(.btn-paging) svg {
+      --icon-stroke: white !important;
+  }
+  button.btn.btn-secondary:not(.btn-paging):active,
+  button.btn.btn-secondary:not(.btn-paging):focus,
+  button.btn.btn-secondary:not(.btn-paging):hover{
+     background: var(--secondary_color) !important;
+     opacity:.8 !important;
+     color: white !important;
+     border-color: var(--secondary_color) !important;
+     border-radius:999px;
+     svg{
+        --icon-stroke: white !important ;
+     } 
+  }
+  button.btn.btn-secondary:not(.btn-paging):hover svg,
+  button.btn.btn-secondary:not(.btn-paging):focus svg,
+  button.btn.btn-secondary:not(.btn-paging):active svg {
+      --icon-stroke: white !important;
+  }
+
+  button.btn.btn-primary:not(.btn-paging){
+     background: var(--primary);
+     color:white;
+     border-color: var(--primary) !important;
+     border-radius:999px; 
+     svg{
+        --icon-stroke: white !important;
+     }
+  }
+  button.btn.btn-primary:not(.btn-paging):active, button.btn.btn-primary:not(.btn-paging):focus,
+  button.btn.btn-primary:not(.btn-paging):hover{
+     background: var(--primary);
+     color:white;
+     border-color: var(--primary) !important;
+     border-radius:999px; 
+     opacity:.8 !important;
+     svg{
+        --icon-stroke: white !important;
+     }
+  }
+}
+
+[data-button-style='Minimal Border Button']{
+  button.btn.btn-default:not(.btn-paging){
+     background:white;
+     border:1px solid color-mix(in srgb, var(--default_color) 10%, white) !important;
+     color:var(--default_color);
+     svg{
+        --icon-stroke: var(--default_color) !important;
+     }
+  }
+  button.btn.btn-default:not(.btn-paging):active, button.btn.btn-default:not(.btn-paging):focus,
+  button.btn.btn-default:not(.btn-paging):hover{
+     background: color-mix(in srgb, var(--default_color) 10%, white) !important;
+     color: var(--default_color);
+     border: 1px solid color-mix(in srgb, var(--default_color) 30%, white) !important;
+  }
+  button.btn.btn-secondary:not(.btn-paging){
+     background:white;
+     border:1px solid color-mix(in srgb, var(--secondary_color) 10%, white) !important;
+     color:var(--secondary_color);
+     svg{
+        --icon-stroke: var(--secondary_color) !important;
+     }
+  }
+  button.btn.btn-secondary:not(.btn-paging):active,
+  button.btn.btn-secondary:not(.btn-paging):focus,
+  button.btn.btn-secondary:not(.btn-paging):hover{
+     background: color-mix(in srgb, var(--secondary_color) 10%, white) !important;
+     color: var(--secondary_color);
+     border-color: color-mix(in srgb, var(--secondary_color) 10%, white) !important;
+     border: 1px solid color-mix(in srgb, var(--secondary_color) 30%, white) !important;
+     svg{
+        --icon-stroke: var(--secondary_color) !important ;
+     } 
+  }
+
+  button.btn.btn-primary:not(.btn-paging){
+     background:white;
+     border:1px solid color-mix(in srgb, var(--primary) 10%, white) !important;
+     color:var(--primary);
+     svg{
+        --icon-stroke: var(--primary) !important;
+     }
+  }
+  button.btn.btn-primary:not(.btn-paging):active, button.btn.btn-primary:not(.btn-paging):focus,
+  button.btn.btn-primary:not(.btn-paging):hover{
+     background: color-mix(in srgb, var(--primary) 10%, white) !important;
+     color: var(--primary);
+     border: 1px solid color-mix(in srgb, var(--primary) 30%, white) !important;
+     svg{
+        --icon-stroke: var(--primary) !important ;
+     } 
+  }
+}
+[data-button-style='Dashed Border Button']{
+  button.btn.btn-default:not(.btn-paging){
+     background:white !important;
+     color:var(--default_color) !important;
+     border:1px dashed var(--default_color) !important;
+     svg{
+        --icon-stroke: var(--default_color) !important;
+     }
+  }
+  button.btn.btn-default:not(.btn-paging):active, button.btn.btn-default:not(.btn-paging):focus,
+  button.btn.btn-default:not(.btn-paging):hover{
+     background: color-mix(in srgb, var(--default_color) 10%, white) !important;
+  }
+  button.btn.btn-secondary:not(.btn-paging){
+     background:white !important;
+     color:var(--secondary_color) !important;
+     border:1px dashed var(--secondary_color) !important;
+     svg{
+        --icon-stroke: var(--secondary_color) !important;
+     }
+  }
+  button.btn.btn-secondary:not(.btn-paging):active,
+  button.btn.btn-secondary:not(.btn-paging):focus,
+  button.btn.btn-secondary:not(.btn-paging):hover{
+     background: color-mix(in srgb, var(--secondary_color) 10%, white) !important;
+     svg{
+        --icon-stroke: var(--secondary_color) !important ;
+     } 
+  }
+
+  button.btn.btn-primary:not(.btn-paging){
+     background:white !important;
+     color:var(--primary) !important;
+     border:1px dashed var(--primary) !important;
+     svg{
+        --icon-stroke: var(--primary) !important;
+     }
+  }
+  button.btn.btn-primary:not(.btn-paging):active, button.btn.btn-primary:not(.btn-paging):focus,
+  button.btn.btn-primary:not(.btn-paging):hover{
+     background: color-mix(in srgb, var(--primary) 10%, white) !important;
+     svg{
+        --icon-stroke: var(--primary) !important ;
+     } 
+  }
+}

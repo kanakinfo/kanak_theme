@@ -10,6 +10,7 @@
   "theme_name",
   "primary_color",
   "secondary_color",
+  "secondary_font_color",
   "background_color",
   "list_subject_color",
   "column_break_svwx",
@@ -18,11 +19,14 @@
   "sidebar_font_color",
   "group_by_background_color",
   "group_by_font_color",
+  "default_button_color",
+  "default_button_font_color",
   "styles_section",
   "form_style",
   "list_style",
   "column_break_tbwa",
   "font_family",
+  "button_style",
   "menu_settings_section",
   "table_mogv"
  ],
@@ -53,7 +57,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "#A6B1E1",
+   "default": "#f2f3f7",
    "fieldname": "secondary_color",
    "fieldtype": "Color",
    "label": "Secondary Color",
@@ -126,7 +130,8 @@
    "default": "#FFFFFF",
    "fieldname": "group_by_font_color",
    "fieldtype": "Color",
-   "label": "Group By Font Color"
+   "label": "Group By Font Color",
+   "reqd": 1
   },
   {
    "fieldname": "styles_section",
@@ -143,12 +148,38 @@
    "fieldtype": "Color",
    "label": "List Subject Color",
    "reqd": 1
+  },
+  {
+   "default": "#00000",
+   "fieldname": "secondary_font_color",
+   "fieldtype": "Color",
+   "label": "Secondary Font Color"
+  },
+  {
+   "fieldname": "button_style",
+   "fieldtype": "Select",
+   "label": "Button Style",
+   "options": "\nFlat Button\nOutline Button\n3D Button\nGradient Button\nPill Rounded Button\nMinimal Border Button\nDashed Border Button"
+  },
+  {
+   "default": "#CB2929",
+   "fieldname": "default_button_color",
+   "fieldtype": "Color",
+   "label": "Default Button Color",
+   "reqd": 1
+  },
+  {
+   "default": "#ffffff",
+   "fieldname": "default_button_font_color",
+   "fieldtype": "Color",
+   "label": "Default Button Font Color",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-19 17:31:27.706154",
+ "modified": "2025-11-20 18:41:04.776530",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

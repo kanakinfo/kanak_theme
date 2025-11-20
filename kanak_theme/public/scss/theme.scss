@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import "./buttons";
 body, .form-control, .page-form {
     font-family: var(--font-family-style), sans-serif !important;
 }
@@ -671,3 +672,17 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       color: var(--group_by_font_color) !important;
     }
 }
+.frappe-list .result .list-row-head {
+    z-index: 1;
+    position: sticky;
+    top: 0px;
+    
+    background: #fff;
+}
+.frappe-list .result {
+    overflow-y: auto;
+    height: calc(100vh - 300px);
+}
+
+
+

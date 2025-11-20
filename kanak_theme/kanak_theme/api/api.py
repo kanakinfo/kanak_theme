@@ -85,7 +85,7 @@ def build_group_tree(doctype, fields, levels, base_filters, level_index=0):
 
 
 @frappe.whitelist()
-def grouped_list(doctype, fields, filters=None, group_by=None, order_by=None, limit=None, start=None):
+def grouped_list(doctype, fields, filters=None, group_by=None, order_by=None, limit=None, page_length=None, start=None):
     fields = json.loads(fields) if isinstance(fields, str) else fields
     filters = json.loads(filters or "[]") if isinstance(filters, str) else filters
 
@@ -102,7 +102,7 @@ def grouped_list(doctype, fields, filters=None, group_by=None, order_by=None, li
             filters=filters,
             order_by=order_by,
             limit_start=start,
-            limit_page_length=limit
+            limit_page_length=page_length
         )
 
     # ----------------------------------------------------------

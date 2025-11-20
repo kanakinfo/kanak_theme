@@ -38,17 +38,12 @@ frappe.ui.form.ControlCheck = class ControlCheckToggle extends frappe.ui.form.Co
         this.input_area = this.$wrapper.find("input").get(0);
         this.label_area = this.$wrapper.find(".label-area").get(0);
         this.label_span = this.label_area;
-
-        // Set translated label
         this.$wrapper.find(".label-area").text(__(this.df.label || ""));
     }
-
-
     make_input() {
         this.input = this.$wrapper.find("input").get(0);
         this.$input = $(this.input);
         $(this.label_area).off('click.toggle').on('click.toggle', () => {
-            // Check if field editable
             if (this.df.read_only || this.df.disabled) return;
 
             const newValue = !this.input.checked;
@@ -83,11 +78,7 @@ frappe.views.BaseList.prototype.setup_list_wrapper = function(){
     this.$custom_filter_bar = $(`
             <div class="custom-filter-bar"></div>
         `).appendTo(this.page.main);
-    // this.$group_filter_bar = $(`
-    //         <div class="custom-group-bar"></div>
-    //     `).appendTo(this.page.main);
        super_setup_list_wrapper.call(this);
-       // this.setup_custom_group_events();
        this.setup_custom_filter_events();
 };
 frappe.views.BaseList.prototype.setup_custom_group_events = function () {
@@ -179,8 +170,6 @@ frappe.ui.form.QuickUpdateForm = class QuickUpdateForm {
         form_container.style.marginTop = "8px";
         form_container.style.borderRadius = "6px";
         this.wrapper.appendChild(form_container);
-
-        // FieldGroup
         this.fg = new frappe.ui.FieldGroup({
             fields: fields,
             parent: form_container,
@@ -190,15 +179,12 @@ frappe.ui.form.QuickUpdateForm = class QuickUpdateForm {
         this.fg.make();
 
         frappe.after_ajax(() => {
-            // set values
             fields.forEach(df => {
                 let field = this.fg.fields_dict[df.fieldname];
                 if (field?.set_value) {
                     field.set_value(this.doc[df.fieldname]);
                 }
             });
-
-            // Buttons
             let btns = document.createElement("div");
             btns.style.marginTop = "12px";
 
@@ -207,15 +193,11 @@ frappe.ui.form.QuickUpdateForm = class QuickUpdateForm {
                 <button class="btn btn-secondary btn-sm quick-cancel">Cancel</button>
             `;
             form_container.appendChild(btns);
-
-            // SAVE button
             btns.querySelector(".quick-save").onclick = () => {
                 let values = this.fg.get_values();
                 if (!values) return;
                 this.update(values);
             };
-
-            // CANCEL button
             btns.querySelector(".quick-cancel").onclick = () => {
                 this.wrapper.remove();
             };
@@ -234,8 +216,6 @@ frappe.ui.form.QuickUpdateForm = class QuickUpdateForm {
             callback(r) {
                 me.wrapper.remove();
                 frappe.show_alert("Updated successfully");
-
-                // Refresh list automatically
                 me.refresh_list();
             },
         });
@@ -271,7 +251,6 @@ frappe.views.ListView.prototype.render = function () {
         super_render.call(this);
     }
     this.add_quick_icon_events();
-    // this.bind_group_header_toggle();
 };
 frappe.views.ListView.prototype.add_quick_icon_events = function () {
     let me = this;
@@ -289,12 +268,10 @@ frappe.views.ListView.prototype.add_quick_icon_events = function () {
             ev.stopImmediatePropagation();
 
             let docname = row.find('.list-row-checkbox').attr("data-name");
-
-            // ==== Toggle logic ====
             let existing = row.next(".quick-form-wrapper");
 
             if (existing.length) {
-                existing.remove();  // close if already open
+                existing.remove();
                 return;
             }
 
@@ -396,7 +373,7 @@ frappe.views.ListView.prototype.before_render =function(){
                 <div class="group-by-panel">
                     <select class="group-field form-control" style="width:100px">
                     </select>
-                    <button class="btn btn-sm btn-primary add-level">+</button>
+                    <button class="btn btn-sm btn-default add-level">+</button>
                 </div>
             `);
             this.$group_by_panel.prependTo(this.$page.find('.page-form .filter-section'));
