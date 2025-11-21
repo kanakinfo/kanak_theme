@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 }
 .kanak_theme_main_cl{
   #navbar-breadcrumbs li:first-child a:before {
-    content: none;
+    content: none !important;
     margin: 0;
   }
   .page-container{
@@ -99,11 +99,20 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
+    height: calc(100vh - 17px);
+    margin-top: 7px;
+    margin-left: 7px;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    overflow: hidden;
     width: 260px;
     background:var(--side_bg_color);
     z-index: 1030;
     transition: all 0.5s ease;
+    scrollbar-width: none;
+  }
+  .sidebar::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
   }
   .kanak_avatar_letter{
       background: white;
@@ -419,8 +428,29 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     header.navbar{
       border-radius:25px;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      background-color: var(--header_background_color);
+      border-color: var(--header_background_color);
+      #navbar-breadcrumbs a{
+        color: var(--header_font_color);
+        &::before{
+          font-family: "FontAwesome";
+          font-weight: 900;
+          content: "\f105";
+          margin-right: 10px;
+          font-size: 12px;
+          color: var(--header_font_color);
+        }
+      }
+      #navbar-breadcrumbs li.disabled a{
+         color: var(--header_breadcrumb_disabled_color);
+      }
+      ul.navbar-nav > li > button{
+        color: var(--header_font_color);;
+      }
+      ul.navbar-nav > li > button svg{
+        --icon-stroke:var(--header_font_color);
+      }
     }
-
 }
 
 [data-list-style='Google Material UI look']{
@@ -683,6 +713,136 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     overflow-y: auto;
     height: calc(100vh - 300px);
 }
+.themeswitcher {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+.themeswitcher__item {
+    margin: 0;
+}
 
+.themepicker__btn {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    padding: 1rem 1.2rem;
+    min-width: 160px;
+    text-align: left;
+    cursor: pointer;
+    transition: all .2s ease;
+    display: block;
+    width: 100%;
+}
+.themepicker__btn:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+}
+.themepicker__name {
+    font-weight: 600;
+    color: #111827;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: .6rem;
+}
+.themepicker__palette {
+    display: flex;
+    gap: .4rem;
+    align-items: center;
+}
+.themepicker__swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+}
+.datepickers-container{
+  .datepicker--day-name{
+    color: var(--date_picker_color);
+  }
+  .datepicker{
+    color: var(--date_picker_color);
+  }
+  .datepicker--button{
+    color: var(--date_picker_color);
+  }
+  .datepicker--cell.-selected-, .datepicker--cell.-current-.-selected-{
+    background-color: var(--date_picker_color);
+  }
+  .datepicker--cell.-selected-.-focus-{
+    background-color: var(--date_picker_color);
+  }
+  .datepicker--cell.-focus-{
+    background-color: var(--date_picker_color_light);
+  }
+}
 
+.notif-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(1px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 1030;
+}
+
+.notif-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.notif-sidebar {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 420px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: right 0.3s ease;
+    z-index: 1040;
+    display: flex;
+    flex-direction: column;
+}
+
+.notif-sidebar.open {
+    right: 0;
+}
+.notif-header {
+    padding: 15px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notif-close {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Body */
+.notif-body {
+    overflow-y: auto;
+    height: calc(100% - 55px);
+    .notifications-list{
+      width: 100%;
+      height: 100vh;
+      .notifications-list .notification-list-body{
+          max-height: calc(100vh - 150px);
+      }
+    }
+}
 

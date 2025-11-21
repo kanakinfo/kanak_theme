@@ -14,8 +14,94 @@ frappe.after_ajax(() => {
         .on("click.theme", ".sidebar.theme_sidebar .arrow", function(e) {
             e.preventDefault();
             $(this).closest("li").toggleClass("showMenu");
-        });
+    });
+
 });
+
+frappe.provide("frappe.ui.toolbar");
+
+frappe.ui.toolbar.add_theme_menu_item = function () {
+    frappe.call({
+        method: "kanak_theme.kanak_theme.api.api.get_themes",
+        callback: function (r) {
+            if (!r.message) return;
+
+            let themes = r.message;
+
+            let html = `<ul class="themeswitcher">`;
+
+            themes.forEach(theme => {
+                html += `
+                <li class="themeswitcher__item">
+                    <button class="themepicker__btn js-themepicker-themeselect"
+                        data-theme="${theme.name}"
+                        aria-label="select theme '${theme.theme_name}'">
+                        
+                        <span class="themepicker__name">${theme.theme_name}</span>
+                        <span class="themepicker__palette">
+                            <span class="themepicker__swatch" style="background:${theme.primary_color}; border:2px solid #fff;"></span>
+                            <span class="themepicker__swatch" style="background:${theme.secondary_color}; border:2px solid #fff;"></span>
+                            <span class="themepicker__swatch" style="background:${theme.background_color}" border:2px solid #fff;"></span>
+                            <span class="themepicker__swatch" style="background:${theme.header_background_color}" border:2px solid #fff;"></span>
+                            <span class="themepicker__swatch" style="background:${theme.default_button_color}" border:2px solid #fff;"></span>
+                            <span class="themepicker__swatch" style="background:${theme.sidebar_background_color}" border:2px solid #fff;"></span>
+                        </span>
+                    </button>
+                </li>`;
+            });
+
+            html += `</ul>`;
+
+            let d = new frappe.ui.Dialog({
+                title: __("Choose Theme"),
+                size: "large",
+                fields: [
+                    {
+                        fieldname: "theme_html",
+                        fieldtype: "HTML",
+                        options: html
+                    }
+                ]
+            });
+
+            d.show();
+
+            // attach event listeners
+            setTimeout(() => {
+                d.$wrapper.find(".js-themepicker-themeselect").on("click", function () {
+                    const theme_name = $(this).data("theme");
+                    apply_theme(theme_name);
+                    d.hide();
+                });
+            }, 200);
+        }
+    });
+};
+
+frappe.ui.toolbar.Toolbar.prototype.setup_notifications = function(){
+    if (frappe.boot.desk_settings.notifications && frappe.session.user !== "Guest") {
+        this.notifications = new frappe.ui.CustomNotifications();
+    }
+};
+
+
+function apply_theme(theme_name) {
+    frappe.call({
+        method: "kanak_theme.kanak_theme.api.api.apply_theme",
+        args: { theme: theme_name },
+        callback: function () {
+            frappe.show_alert({
+                message: __("Theme switched to ") + theme_name,
+                indicator: "green"
+            });
+
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        }
+    });
+}
+
 frappe.ui.form.ControlCheck = class ControlCheckToggle extends frappe.ui.form.ControlData {
     static html_element = "input";
     static input_type = "checkbox";

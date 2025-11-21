@@ -5,6 +5,7 @@ def after_install():
     create_system_settings_theme_field()
     create_default_theme()
     set_default_theme()
+    add_standard_navbar_items()
 
 
 def create_system_settings_theme_field():
@@ -44,3 +45,23 @@ def set_default_theme():
     if not existing:
         frappe.db.set_single_value("System Settings", "theme", "Default Theme")
         frappe.db.commit()
+
+
+def add_standard_navbar_items():
+    navbar_settings = frappe.get_single("Navbar Settings")
+    if frappe.db.exists("Navbar Item", {"item_label": "Theme Switcher"}):
+        return
+    for navbar_item in navbar_settings.settings_dropdown[6:]:
+        navbar_item.idx = navbar_item.idx + 1
+    navbar_settings.append(
+        "settings_dropdown",
+        {
+            "item_label": "Theme Switcher",
+            "item_type": "Action",
+            "action": "frappe.ui.toolbar.add_theme_menu_item()",
+            "is_standard": 1,
+            "idx": 7,
+        },
+    )
+
+    navbar_settings.save()

@@ -13,6 +13,7 @@
   "secondary_font_color",
   "background_color",
   "list_subject_color",
+  "date_picker_color",
   "column_break_svwx",
   "sidebar_background_color",
   "sidebar_hover_color",
@@ -21,6 +22,11 @@
   "group_by_font_color",
   "default_button_color",
   "default_button_font_color",
+  "header_settings_section",
+  "header_background_color",
+  "column_break_iusw",
+  "header_font_color",
+  "header_breadcrumb_disabled_color",
   "styles_section",
   "form_style",
   "list_style",
@@ -174,12 +180,45 @@
    "fieldtype": "Color",
    "label": "Default Button Font Color",
    "reqd": 1
+  },
+  {
+   "default": "#000000",
+   "fieldname": "date_picker_color",
+   "fieldtype": "Color",
+   "label": "Date Picker Color"
+  },
+  {
+   "fieldname": "header_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Header Settings"
+  },
+  {
+   "default": "#ffffff",
+   "fieldname": "header_background_color",
+   "fieldtype": "Color",
+   "label": "Header Background Color"
+  },
+  {
+   "fieldname": "column_break_iusw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#383838",
+   "fieldname": "header_font_color",
+   "fieldtype": "Color",
+   "label": "Header Font Color"
+  },
+  {
+   "default": "#7c7c7c",
+   "fieldname": "header_breadcrumb_disabled_color",
+   "fieldtype": "Color",
+   "label": "Header Breadcrumb Disabled color"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-20 18:41:04.776530",
+ "modified": "2025-11-21 18:36:26.441114",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

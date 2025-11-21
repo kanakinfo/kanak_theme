@@ -127,3 +127,20 @@ def grouped_list(doctype, fields, filters=None, group_by=None, order_by=None, li
         "is_grouped": True,
         "groups": grouped_data,
     }
+
+
+@frappe.whitelist()
+def get_themes():
+    return frappe.get_all(
+        "Themes",
+        fields=["name", "theme_name", "primary_color", "secondary_color",
+                "background_color", "default_button_color", "sidebar_background_color", "header_background_color"]
+    )
+
+
+@frappe.whitelist()
+def apply_theme(theme):
+    user = frappe.session.user
+    frappe.db.set_value("User", user, "theme", theme)
+    frappe.db.commit()
+    return True
