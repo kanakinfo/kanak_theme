@@ -1,6 +1,19 @@
 <div class="sticky-top theme_header_cl container">
 	<header class="navbar container navbar-expand" role="navigation">
 		<div class="container">
+			<ul class="nav navbar-nav">
+				{% if frappe.boot.is_full_screen_menu %}
+			    <div class="fs-menu-toggle">
+			        <i class="fa fa-th"></i>
+			    </div>
+			    {% else %}
+			      <button class="btn-reset sidebar-toggle-menu_btn" title="" aria-label="Toggle Sidebar" data-original-title="Toggle Sidebar">      
+			      	<svg class="es-icon icon-md sidebar-toggle-placeholder">       
+			      		<use href="#es-line-align-justify"></use>      
+			      	</svg> 
+			       </button>
+			    {% endif %}
+			</ul>
 			<ul class="nav navbar-nav d-none d-sm-flex" id="navbar-breadcrumbs">
 				
 			</ul>

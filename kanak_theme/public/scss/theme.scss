@@ -31,12 +31,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 .icon{
   --icon-stroke:var(--primary);
 }
+[data-is_full_screen_menu="0"]{
+  .theme_section_main{
+        margin-left: 78px;
+        background: var(--bg-background-color);
+  }
+}
 .theme_section_main{
-	    margin-left: 78px;
-      background: var(--bg-background-color);
-      .page-head{
-        background: transparent;
-      }
+    .page-head{
+          background: transparent;
+        }
 }
 .list-subject a{
   color: var(--list_subject_color);
@@ -450,9 +454,35 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       ul.navbar-nav > li > button svg{
         --icon-stroke:var(--header_font_color);
       }
+
+      ul.navbar-nav .sidebar-toggle-menu_btn{
+        display: none;
+        margin-right: 5px;
+      }
+      ul.navbar-nav .sidebar-toggle-menu_btn svg{
+        --icon-stroke:var(--header_font_color);
+      }
+      @media(max-width: 768px){
+        ul.navbar-nav .sidebar-toggle-menu_btn{
+          display: block;
+        }
+      }
     }
 }
-
+@media(max-width: 768px){
+  .kanak_theme_main_cl .sidebar.mpclose{
+    left: -100px;
+  }
+  .kanak_theme_main_cl .theme_section_main{
+    margin-left: inherit;
+  }
+  .kanak_theme_main_cl .sidebar{
+    width: 95%;
+  }
+  .menuchild_layout-side-section{
+    margin-bottom: 10px;
+  }
+}
 [data-list-style='Google Material UI look']{
   .list-row-head {
         background: #ffffff;
@@ -845,4 +875,147 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       }
     }
 }
+.fs-menu-toggle{
+  display: flex;
+  align-items: center;
+  i{
+    color: var(--header_font_color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-top: 1px;
+  }
+}
+.full-screen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    padding: 40px;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.2s ease;
+    overflow-y: auto;
+}
 
+.full-screen-menu.hidden {
+    display: none;
+}
+.desktop-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.fs-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.fs-menu-close {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.fs-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: center;
+    gap: 30px;
+    @media(max-width: 768px){
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+}
+.ch-fs-menu-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: center;
+    gap: 15px;
+}
+.fs-menu-item {
+    display: flex;
+    height: 100px;
+    width: 100px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+    transition: all 0.2s ease;
+}
+
+.fs-menu-item:hover {
+    transform: translateY(-5px);
+}
+
+.fs-menu-icon {
+    width: 48px;
+    height: 48px;
+    margin-top: 5px;
+}
+
+.fs-menu-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+.fs-menu-toggle {
+    cursor: pointer;
+    padding: 10px;
+}
+.openmegamenu_cl .theme_header_cl::before {
+  background: transparent;
+}
+.openmegamenu_cl{
+  .full-screen-menu{
+        background: var(--menu_bg_for_full_screen, #f8f8f8);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+  }
+}
+.menuchild_layout-side-section {
+    max-height: calc(100vh - 126px);
+    padding: 0;
+    background: white;
+    border-radius: 15px;
+    margin-left: 14px;
+    border: 1px solid var(--border-color);
+}
+
+.child-menu-wrapper {
+    padding: 10px 0;
+}
+
+.child-menu-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #444;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.child-menu-item:hover {
+    background: var(--focus-default, #eeeeee);
+}
+
+.child-menu-item.active {
+    font-weight: 600;
+    background: color-mix(in srgb, var(--primary) 10%, white);
+    border-left-color: var(--primary);
+    color: var(--primary);
+}

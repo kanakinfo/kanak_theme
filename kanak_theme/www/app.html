@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme-mode="{{ desk_theme.lower() }}" data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}" data-list-style="{{list_style}}" data-form-style="{{form_style}}" data-button-style="{{button_style}}">
+<html data-theme-mode="{{ desk_theme.lower() }}" data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}" data-list-style="{{list_style}}" data-form-style="{{form_style}}" data-button-style="{{button_style}}" data-is_full_screen_menu="{{is_full_screen_menu}}">
 	<head>
 		<meta charset="UTF-8">
 		<!-- Chrome, Firefox OS and Opera -->
@@ -45,6 +45,7 @@
 	<body class="kanak_theme_main_cl">
 		{% include "templates/includes/splash_screen.html" %}
 		<div class="main-section">
+			{% if not is_full_screen_menu %}
 			<div class="sidebar theme_sidebar mpclose">
 			    <div class="logo-details {% if company_logo %}has-logo{% endif %}">
 			    	{% if company_logo %}
@@ -126,12 +127,39 @@
 				    {% endfor %}
 				</ul>
 			  </div>
+			{% endif %}
 			<div class="theme_section_main">
 				<header></header>
 				<div id="body"></div>
 				<footer></footer>
 			</div>
 		</div>
+		{% if is_full_screen_menu %}
+		<div id="full-screen-menu" class="full-screen-menu hidden" style="background-image: url({{menu_bg_img_for_full_screen}});">
+			<div class="desktop-container">
+					<div class="icons-container">
+				    	<div class="fs-menu-grid">
+					        {% for ws in allowed_workspaces if not ws.parent_page %}
+					        {% set children = allowed_workspaces | selectattr("parent_page", "equalto", ws.name) | list %}
+					        <div class="fs-menu-item" 
+					        	onclick='window.location="/app/{% if ws.public %}{{ ws.title|lower|replace(" ", "-") }}{% else %}private/{{ ws.title|lower|replace(" ", "-") }}{% endif %}";'
+					        	data-menuname="{{ws.name}}"
+					        	>
+					            {% if ws.image %}
+					            <img src="{{ ws.image }}" class="fs-menu-icon">
+					            {% elif ws.icon %}
+					            <svg class="icon icon-lg fs-menu-icon">
+					                <use href="#icon-{{ ws.icon }}"></use>
+					            </svg>
+					            {% endif %}
+					            <div class="fs-menu-label">{{ _(ws.title) }}</div>
+					        </div>
+					        {% endfor %}
+				    	</div>
+				    </div>
+			    </div>
+			</div>
+		{% endif %}
 		<div id="notif-overlay" class="notif-overlay"></div>
 		<div id="notif-sidebar" class="notif-sidebar">
 			<div class="notif-header">
@@ -157,7 +185,6 @@
 
 		<script type="text/javascript">
 			window._version_number = "{{ build_version }}";
-			// browser support
 			window.app = true;
 			window.dev_server = {{ dev_server }};
 
@@ -189,5 +216,8 @@
 			<source src="{{ sound.src }}"></source>
 		</audio>
 		{% endfor %}
+	
 	</body>
+
+
 </html>

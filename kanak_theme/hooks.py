@@ -242,3 +242,4 @@ after_install = "kanak_theme.install.after_install"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+extend_bootinfo = ["kanak_theme.www.app.get_is_full_screen_menu_or_not"]

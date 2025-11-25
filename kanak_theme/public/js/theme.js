@@ -3,22 +3,37 @@ frappe.provide("frappe.ui.form");
 frappe.provide("frappe.views");
 frappe.after_ajax(() => {
     const sidebarEl = $(".sidebar.theme_sidebar");
-    sidebarEl.off('mouseover.theme').on('mouseover.theme', () => {
-        sidebarEl.removeClass('mpclose');
-    });
+    sidebarEl
+        .off('mouseover.theme')
+        .on('mouseover.theme', () => {
+            sidebarEl.removeClass('mpclose');
+        });
 
-    sidebarEl.off('mouseout.theme').on('mouseout.theme', () => {
-        sidebarEl.addClass('mpclose');
-    });
+    sidebarEl
+        .off('mouseout.theme')
+        .on('mouseout.theme', () => {
+            sidebarEl.addClass('mpclose');
+        });
+
     $(document).off("click.theme", ".sidebar.theme_sidebar .arrow")
         .on("click.theme", ".sidebar.theme_sidebar .arrow", function(e) {
             e.preventDefault();
             $(this).closest("li").toggleClass("showMenu");
     });
-
+    
 });
-
+frappe.router.on('change', () => {
+    const fsMenu = document.getElementById("full-screen-menu");
+    if(fsMenu){
+        $(fsMenu).addClass('hidden');
+    }
+    const sidebarEl = $(".sidebar.theme_sidebar");
+    if(sidebarEl){
+        $(sidebarEl).addClass('mpclose');
+    }
+});
 frappe.provide("frappe.ui.toolbar");
+frappe.ui.toolbar.fullscreen_selected_parent = null;
 
 frappe.ui.toolbar.add_theme_menu_item = function () {
     frappe.call({
@@ -65,8 +80,6 @@ frappe.ui.toolbar.add_theme_menu_item = function () {
             });
 
             d.show();
-
-            // attach event listeners
             setTimeout(() => {
                 d.$wrapper.find(".js-themepicker-themeselect").on("click", function () {
                     const theme_name = $(this).data("theme");
@@ -77,8 +90,32 @@ frappe.ui.toolbar.add_theme_menu_item = function () {
         }
     });
 };
+frappe.ui.toolbar.Toolbar.prototype.bind_full_screen_menu_events = function(){
+    var self = this;
+    const fsMenu = document.getElementById("full-screen-menu");
+    const openBtn = document.querySelector(".fs-menu-toggle");
+    if (fsMenu && openBtn) {
+        const openBtn = document.querySelector(".fs-menu-toggle");
+        if(openBtn){
+            openBtn.addEventListener("click", () => {
+                if ($(fsMenu).hasClass("hidden")) {
+                    $('.kanak_theme_main_cl').addClass('openmegamenu_cl');
+                }else{
+                    $('.kanak_theme_main_cl').removeClass('openmegamenu_cl');
+                }
+                $(fsMenu).toggleClass('hidden');
+            });
+        }
+    }
+    if($(".sidebar-toggle-menu_btn").length){
+        $(".sidebar-toggle-menu_btn").on('click', function(ev){
+            $(".kanak_theme_main_cl .sidebar.theme_sidebar").toggleClass('mpclose');
+        });
+    }
 
+};
 frappe.ui.toolbar.Toolbar.prototype.setup_notifications = function(){
+    this.bind_full_screen_menu_events();
     if (frappe.boot.desk_settings.notifications && frappe.session.user !== "Guest") {
         this.notifications = new frappe.ui.CustomNotifications();
     }
@@ -101,7 +138,76 @@ function apply_theme(theme_name) {
         }
     });
 }
+const super_make_sidebar = frappe.views.Workspace.prototype.make_sidebar;
 
+frappe.views.Workspace.prototype.prepare_child_side_bar = function(){
+        let menuname = frappe.router.slug(this.get_page_to_show().name);
+        let menus = this.get_menu_with_children(menuname);
+        this.wrapper.find(".menuchild_layout-side-section").remove();
+        if (frappe.boot.is_full_screen_menu && menus.length > 1) {
+            let sidebar = $(`
+                <div class="col-lg-2 menuchild_layout-side-section">
+                    <div class="child-menu-wrapper"></div>
+                </div>
+            `);
+            this.wrapper.find(".layout-side-section").after(sidebar);
+            let child_container = sidebar.find(".child-menu-wrapper");
+            menus.forEach(slug => {
+                child_container.append(`
+                    <div class="child-menu-item" data-slug="${slug}">
+                        <span>${this.get_menu_label(slug)}</span>
+                    </div>
+                `);
+            });
+            let current_slug = frappe.router.slug(menuname);
+            child_container.find(`[data-slug="${current_slug}"]`).addClass("active");
+            child_container.on("click", ".child-menu-item", (e) => {
+                let item = $(e.currentTarget);
+                let slug = $(e.currentTarget).data("slug");
+                child_container.find(".child-menu-item").removeClass("active");
+                item.addClass("active");
+                let is_private = this.is_private_workspace(slug);
+                if (is_private) {
+                    frappe.set_route(`/private/${slug}`);
+                } else {
+                    frappe.set_route(slug);
+                }
+            });
+        }
+};
+frappe.views.Workspace.prototype.get_menu_with_children = function(menu_name){
+        let all = frappe.boot.allowed_workspaces;
+        let input_slug = frappe.router.slug(menu_name);
+        let current = all.find(ws => frappe.router.slug(ws.name) === input_slug);
+
+        if (!current) return [];
+
+        let parent_slug;
+        if (current.parent_page) {
+            parent_slug = frappe.router.slug(current.parent_page);
+        } 
+        else {
+            parent_slug = frappe.router.slug(current.name);
+        }
+        let children = all
+            .filter(ws => ws.parent_page && frappe.router.slug(ws.parent_page) === parent_slug)
+            .map(ws => frappe.router.slug(ws.name));
+        return [parent_slug, ...children];
+};
+frappe.views.Workspace.prototype.get_menu_label = function(slug){
+    let ws = frappe.boot.allowed_workspaces
+            .find(w => frappe.router.slug(w.name) === slug);
+    return ws ? ws.label || ws.name : slug;
+};
+frappe.views.Workspace.prototype.is_private_workspace = function(slug){
+    let ws = frappe.boot.allowed_workspaces
+            .find(w => frappe.router.slug(w.name) === slug);
+    return ws && ws.private ? true : false;
+};
+frappe.views.Workspace.prototype.make_sidebar = function(){
+    super_make_sidebar.call(this);
+    this.prepare_child_side_bar();
+};
 frappe.ui.form.ControlCheck = class ControlCheckToggle extends frappe.ui.form.ControlData {
     static html_element = "input";
     static input_type = "checkbox";

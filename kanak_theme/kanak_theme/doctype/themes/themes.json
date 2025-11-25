@@ -34,6 +34,9 @@
   "font_family",
   "button_style",
   "menu_settings_section",
+  "is_full_screen_menu",
+  "menu_bg_img_for_full_screen",
+  "menu_bg_for_full_screen",
   "table_mogv"
  ],
  "fields": [
@@ -123,6 +126,7 @@
   {
    "fieldname": "table_mogv",
    "fieldtype": "Table",
+   "label": "Menu Icons",
    "options": "Theme Menu"
   },
   {
@@ -213,12 +217,30 @@
    "fieldname": "header_breadcrumb_disabled_color",
    "fieldtype": "Color",
    "label": "Header Breadcrumb Disabled color"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_full_screen_menu",
+   "fieldtype": "Check",
+   "label": "Is Full screen Menu"
+  },
+  {
+   "depends_on": "eval:doc.is_full_screen_menu",
+   "fieldname": "menu_bg_img_for_full_screen",
+   "fieldtype": "Attach Image",
+   "label": "Menu BG Img For Full Screen"
+  },
+  {
+   "depends_on": "eval:doc.is_full_screen_menu",
+   "fieldname": "menu_bg_for_full_screen",
+   "fieldtype": "Color",
+   "label": "Menu BG for Full Screen"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-21 18:36:26.441114",
+ "modified": "2025-11-24 16:40:35.572415",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",
