@@ -8,6 +8,7 @@
 @import "./buttons";
 body, .form-control, .page-form {
     font-family: var(--font-family-style), sans-serif !important;
+
 }
 [data-page-route=Workspaces] .layout-main .layout-side-section, 
 [data-page-route=Workspaces] .sidebar-toggle-btn{
@@ -767,6 +768,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     transition: all .2s ease;
     display: block;
     width: 100%;
+    text-align: center;
 }
 .themepicker__btn:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -1018,4 +1020,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     background: color-mix(in srgb, var(--primary) 10%, white);
     border-left-color: var(--primary);
     color: var(--primary);
+}
+.page-form .sort-selector .sort-selector-button{
+  z-index: 2;
 }

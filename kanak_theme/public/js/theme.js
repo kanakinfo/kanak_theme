@@ -369,7 +369,6 @@ frappe.ui.form.QuickUpdateForm = class QuickUpdateForm {
         });
 
         this.fg.make();
-
         frappe.after_ajax(() => {
             fields.forEach(df => {
                 let field = this.fg.fields_dict[df.fieldname];
@@ -377,21 +376,35 @@ frappe.ui.form.QuickUpdateForm = class QuickUpdateForm {
                     field.set_value(this.doc[df.fieldname]);
                 }
             });
+
             let btns = document.createElement("div");
             btns.style.marginTop = "12px";
 
+            // Add buttons
             btns.innerHTML = `
                 <button class="btn btn-primary btn-sm quick-save">Save</button>
                 <button class="btn btn-secondary btn-sm quick-cancel">Cancel</button>
+                <button class="btn btn-primary btn-sm quick-open-form" title="Open Full Form">
+                    <svg class="icon icon-sm mb-1">
+                        <use href="#icon-right"></use>
+                    </svg>
+                </button>
             `;
             form_container.appendChild(btns);
+            if (this.doc.docstatus !== 0) {
+                btns.querySelector(".quick-save").style.display = "none";
+            }
             btns.querySelector(".quick-save").onclick = () => {
                 let values = this.fg.get_values();
                 if (!values) return;
                 this.update(values);
             };
+
             btns.querySelector(".quick-cancel").onclick = () => {
                 this.wrapper.remove();
+            };
+            btns.querySelector(".quick-open-form").onclick = () => {
+                frappe.set_route("Form", this.doctype, this.docname);
             };
         });
     }
@@ -661,6 +674,30 @@ frappe.views.ListView.prototype.render_group_nodes = function (nodes, level, con
 };
 frappe.views.ListView.prototype.render_grouped_row = function (doc) {
     return this.get_list_row_html(doc);
+};
+
+const super_set_actions = frappe.widget.widget_factory.onboarding.prototype.set_actions;
+frappe.widget.widget_factory.onboarding.prototype.set_actions = function(){
+    if (this.in_customize_mode) return;
+
+        this.action_area.empty();
+        const dismiss = $(
+            `<button class="btn btn-sm btn-secondary small" style="cursor:pointer;">${__(
+                "Dismiss",
+                null,
+                "Stop showing the onboarding widget."
+            )}</button>`
+        );
+        dismiss.on("click", () => {
+            let dismissed = JSON.parse(localStorage.getItem("dismissed-onboarding") || "{}");
+            dismissed[this.title] = frappe.datetime.now_datetime();
+
+            localStorage.setItem("dismissed-onboarding", JSON.stringify(dismissed));
+            this.delete(true, true);
+            this.widget.closest(".ce-block").hide();
+            frappe.telemetry.capture("dismissed_" + frappe.scrub(this.title), "frappe_onboarding");
+        });
+        dismiss.appendTo(this.action_area);
 };
 
 
