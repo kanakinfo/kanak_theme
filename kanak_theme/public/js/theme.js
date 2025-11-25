@@ -116,6 +116,7 @@ frappe.ui.toolbar.Toolbar.prototype.bind_full_screen_menu_events = function(){
 };
 frappe.ui.toolbar.Toolbar.prototype.setup_notifications = function(){
     this.bind_full_screen_menu_events();
+    this.userprofiledetails = new frappe.ui.UserProfileInfo();
     if (frappe.boot.desk_settings.notifications && frappe.session.user !== "Guest") {
         this.notifications = new frappe.ui.CustomNotifications();
     }
@@ -455,7 +456,9 @@ frappe.views.ListView.prototype.render = function () {
     } else {
         super_render.call(this);
     }
-    this.add_quick_icon_events();
+    if (this.meta && this.meta.quick_entry) {
+        this.add_quick_icon_events();
+    }
 };
 frappe.views.ListView.prototype.add_quick_icon_events = function () {
     let me = this;

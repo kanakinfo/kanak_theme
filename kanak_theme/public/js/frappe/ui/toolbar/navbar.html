@@ -113,7 +113,7 @@
 						>
 							{{ avatar }}
 						</button>
-						<div class="dropdown-menu dropdown-menu-right" id="toolbar-user" role="menu">
+												<div class="dropdown-menu dropdown-menu-right" id="toolbar-user" role="menu">
 							{% for item in navbar_settings.settings_dropdown %}
 								{% var condition = item.condition ? eval(item.condition) : true %}
 								{% if (condition && !item.hidden) { %}

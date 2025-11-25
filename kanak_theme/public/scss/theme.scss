@@ -1024,3 +1024,143 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 .page-form .sort-selector .sort-selector-button{
   z-index: 2;
 }
+#profile-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease;
+    z-index: 1030;
+}
+
+#profile-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+.user-profile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    z-index: 1040;
+    transition: right .25s ease;
+    padding: 0;
+}
+
+.user-profile-sidebar.open {
+    right: 0;
+}
+
+.user-profile-sidebar{
+  color: var(--primary);
+  .profile-sidebar-header {
+      padding: 18px;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      display: flex;
+      font-size: 18px;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .profile-close {
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+  }
+
+  .profile-sidebar-body {
+      padding: 18px;
+      overflow-y: auto;
+      height: calc(100% - 60px);
+  }
+
+  .profile-header {
+      text-align: center;
+      padding: 8px 0px;
+      align-items: center;
+      gap: 15px;
+  }
+  .profile-avatar {
+      width: 55px;
+      height: 55px;
+      position: relative;
+  }
+  .profile-avatar img.avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+  }
+
+  .profile_avatar_letter {
+      width: 55px;
+      height: 55px;
+      background-color: var(--dark-green-avatar-bg);
+      color: var(--dark-green-avatar-color);
+      border-radius: 50%;
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .profile-text {
+      margin-top: 10px;
+  }
+
+  .profile-username {
+      font-size: 20px;
+      font-weight: 600;
+  }
+
+  .profile-email {
+      font-size: 13px;
+      color: #777;
+  }
+
+  .profile-avatar img {
+      width: 100%;
+  }
+
+  .profile-username {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: 600;
+  }
+
+  .profile-email {
+      text-align: center;
+      color: #666;
+      margin-bottom: 20px;
+  }
+
+  .profile-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  .profile-menu li {
+      padding: 12px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .profile-menu li:hover {
+      background: color-mix(in srgb, var(--primary) 10%, white);
+  }
+}
+
