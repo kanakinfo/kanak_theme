@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Charcoal Grey",
+
+  "primary_color": "#1E1E1E",
+  "secondary_color": "#607D8B",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#ECEFF1",
+  "list_subject_color": "#455A64",
+  "date_picker_color": "#263238",
+
+  "sidebar_background_color": "#1E1E1E",
+  "sidebar_hover_color": "#37474F",
+  "sidebar_font_color": "#ECEFF1",
+
+  "group_by_background_color": "#607D8B",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#455A64",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#1E1E1E",
+  "header_font_color": "#ECEFF1",
+  "header_breadcrumb_disabled_color": "#9E9E9E",
+
+  "list_style": "Card Material Theme",
+  "form_style": "",
+  "font_family": "Inter",
+  "button_style": "Flat Button",
+
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#CFD8DC"
+}

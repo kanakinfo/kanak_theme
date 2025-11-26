@@ -1,0 +1,32 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Rose Pink",
+  "primary_color": "#7B1E3A",
+  "secondary_color": "#E91E63",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#FCE7EF",
+  "list_subject_color": "#C2185B",
+  "date_picker_color": "#7B1E3A",
+
+  "sidebar_background_color": "#7B1E3A",
+  "sidebar_hover_color": "#9C2D4B",
+  "sidebar_font_color": "#FFE6EE",
+
+  "group_by_background_color": "#E91E63",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#C2185B",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#7B1E3A",
+  "header_font_color": "#FFE6EE",
+  "header_breadcrumb_disabled_color": "#E6A4B4",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Urbanist",
+  "button_style": "Flat Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#F7C6D8"
+}

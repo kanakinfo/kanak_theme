@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Royal Purple",
+
+  "primary_color": "#3F1D5C",
+  "secondary_color": "#9C27B0",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#EFE7F5",
+  "list_subject_color": "#7B1FA2",
+  "date_picker_color": "#4A1C6F",
+
+  "sidebar_background_color": "#3F1D5C",
+  "sidebar_hover_color": "#5A2D7D",
+  "sidebar_font_color": "#F3E6FA",
+
+  "group_by_background_color": "#9C27B0",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#7B1FA2",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#3F1D5C",
+  "header_font_color": "#F3E6FA",
+  "header_breadcrumb_disabled_color": "#C39BD3",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "3D Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#E3D6EE"
+}

@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Sky Blue",
+
+  "primary_color": "#0D47A1",
+  "secondary_color": "#42A5F5",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#E3F2FD",
+  "list_subject_color": "#1976D2",
+  "date_picker_color": "#1565C0",
+
+  "sidebar_background_color": "#0D47A1",
+  "sidebar_hover_color": "#1976D2",
+  "sidebar_font_color": "#E3F2FD",
+
+  "group_by_background_color": "#42A5F5",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#1976D2",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#0D47A1",
+  "header_font_color": "#E3F2FD",
+  "header_breadcrumb_disabled_color": "#90CAF9",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "Dashed Border Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#BBDEFB"
+}

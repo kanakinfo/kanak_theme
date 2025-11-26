@@ -182,7 +182,13 @@ def get_context(context):
             "header_breadcrumb_disabled_color": theme.as_dict().header_breadcrumb_disabled_color or '#7c7c7c',
             "menu_bg_for_full_screen": theme.as_dict().menu_bg_for_full_screen or '#ffffff',
         }
-
+        is_bg_auto = theme.as_dict().is_bg_auto
+        if is_bg_auto:
+            theme_list.update({
+                "control-bg": adjust_color(background_color, 96),
+                "fg-color": adjust_color(background_color, 70),
+                "bg-color": adjust_color(background_color, 70),
+            })
         context.update({
             'allowed_workspaces': allowed_workspaces,
             "company_name": company_name or _("No Company"),

@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Lime Fresh",
+
+  "primary_color": "#33691E",
+  "secondary_color": "#8BC34A",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#F1F8E9",
+  "list_subject_color": "#9c7f6e",
+  "date_picker_color": "#558B2F",
+
+  "sidebar_background_color": "#33691E",
+  "sidebar_hover_color": "#689F38",
+  "sidebar_font_color": "#F1F8E9",
+
+  "group_by_background_color": "#8BC34A",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#9c7f6e",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#33691E",
+  "header_font_color": "#F1F8E9",
+  "header_breadcrumb_disabled_color": "#C5E1A5",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "Flat Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#DCEDC8"
+}

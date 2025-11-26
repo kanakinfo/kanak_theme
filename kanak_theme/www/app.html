@@ -42,6 +42,13 @@
 		<script type="text/javascript" src="https://cdn.crowdin.com/jipt/jipt.js"></script>
 		{% endif %}
 	</head>
+	<div id="kanak_loading_overlay" class="active">
+	  <div class="loader">
+		  <div class="inner one"></div>
+		  <div class="inner two"></div>
+		  <div class="inner three"></div>
+		</div>
+	</div>
 	<body class="kanak_theme_main_cl">
 		{% include "templates/includes/splash_screen.html" %}
 		<div class="main-section">
@@ -142,8 +149,11 @@
 					        {% for ws in allowed_workspaces if not ws.parent_page %}
 					        {% set children = allowed_workspaces | selectattr("parent_page", "equalto", ws.name) | list %}
 					        <div class="fs-menu-item" 
-					        	onclick='window.location="/app/{% if ws.public %}{{ ws.title|lower|replace(" ", "-") }}{% else %}private/{{ ws.title|lower|replace(" ", "-") }}{% endif %}";'
-					        	data-menuname="{{ws.name}}"
+					        	data-route="{% if ws.public %}
+							        {{ ws.title|lower|replace(' ', '-') }}
+							     {% else %}
+							        private/{{ ws.title|lower|replace(' ', '-') }}
+							     {% endif %}"
 					        	>
 					            {% if ws.image %}
 					            <img src="{{ ws.image }}" class="fs-menu-icon">

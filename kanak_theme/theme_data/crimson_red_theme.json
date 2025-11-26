@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Crimson Red",
+
+  "primary_color": "#7F0000",
+  "secondary_color": "#D32F2F",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#FDECEA",
+  "list_subject_color": "#B71C1C",
+  "date_picker_color": "#8E0000",
+
+  "sidebar_background_color": "#7F0000",
+  "sidebar_hover_color": "#0d0101",
+  "sidebar_font_color": "#faf8f7",
+
+  "group_by_background_color": "#D32F2F",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#B71C1C",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#7F0000",
+  "header_font_color": "#FDECEA",
+  "header_breadcrumb_disabled_color": "#E6A5A5",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "Flat Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#F5C6C6"
+}

@@ -1,0 +1,34 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Dark Blue",
+
+  "primary_color": "#0A1E3F",
+  "secondary_color": "#9c0c0c",
+  "secondary_font_color": "#ffffff",
+  "background_color": "#e6e9f0",
+  "list_subject_color": "#870808",
+  "date_picker_color": "#0B1A33",
+
+  "sidebar_background_color": "#0B1A33",
+  "sidebar_hover_color": "#14325F",
+  "sidebar_font_color": "#E6ECF5",
+
+  "group_by_background_color": "#0A1E3F",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#8a0e0e",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#0A1E3F",
+  "header_font_color": "#E6ECF5",
+  "header_breadcrumb_disabled_color": "#8FA1C1",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "Dashed Border Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 1,
+  "menu_bg_for_full_screen": "#d1d2db",
+  "menu_bg_img_for_full_screen": "/files/pexels-thatguycraig000-1563356.jpg"
+}

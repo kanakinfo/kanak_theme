@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Sunset Orange",
+
+  "primary_color": "#8A2D0F",
+  "secondary_color": "#FF7043",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#FFF0E8",
+  "list_subject_color": "#E64A19",
+  "date_picker_color": "#A84323",
+
+  "sidebar_background_color": "#8A2D0F",
+  "sidebar_hover_color": "#BF360C",
+  "sidebar_font_color": "#FFE4D9",
+
+  "group_by_background_color": "#FF7043",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#E64A19",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#8A2D0F",
+  "header_font_color": "#FFE4D9",
+  "header_breadcrumb_disabled_color": "#F3B39C",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "Dashed Border Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#FFD4C4"
+}

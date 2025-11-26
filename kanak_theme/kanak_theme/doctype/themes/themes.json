@@ -30,6 +30,7 @@
   "styles_section",
   "form_style",
   "list_style",
+  "is_bg_auto",
   "column_break_tbwa",
   "font_family",
   "button_style",
@@ -235,12 +236,19 @@
    "fieldname": "menu_bg_for_full_screen",
    "fieldtype": "Color",
    "label": "Menu BG for Full Screen"
+  },
+  {
+   "default": "0",
+   "description": "Enables automatic background color balancing for forms, lists, and pages according to the theme",
+   "fieldname": "is_bg_auto",
+   "fieldtype": "Check",
+   "label": "Is BG Auto"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-24 16:40:35.572415",
+ "modified": "2025-11-26 18:09:38.594224",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

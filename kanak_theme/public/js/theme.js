@@ -1,6 +1,11 @@
 if (!window.frappe) window.frappe = {};
 frappe.provide("frappe.ui.form");
 frappe.provide("frappe.views");
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("kanak_loading_overlay")?.classList.remove("active");
+  }, 300);
+});
 frappe.after_ajax(() => {
     const sidebarEl = $(".sidebar.theme_sidebar");
     sidebarEl
@@ -107,6 +112,18 @@ frappe.ui.toolbar.Toolbar.prototype.bind_full_screen_menu_events = function(){
             });
         }
     }
+    if(fsMenu){
+        $(fsMenu).on('click', '.fs-menu-item', function(ev){
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            const route = $(this).data("route").trim();
+            if (!route) return;
+            $(fsMenu).addClass("hidden");
+            $(".kanak_theme_main_cl").removeClass("openmegamenu_cl");
+            frappe.router.set_route(route);
+        });
+    }
     if($(".sidebar-toggle-menu_btn").length){
         $(".sidebar-toggle-menu_btn").on('click', function(ev){
             $(".kanak_theme_main_cl .sidebar.theme_sidebar").toggleClass('mpclose');
@@ -204,6 +221,11 @@ frappe.views.Workspace.prototype.is_private_workspace = function(slug){
     let ws = frappe.boot.allowed_workspaces
             .find(w => frappe.router.slug(w.name) === slug);
     return ws && ws.private ? true : false;
+};
+const super_show = frappe.views.Workspace.prototype.show;
+frappe.views.Workspace.prototype.show = function () {
+    super_show.call(this);
+    this.prepare_child_side_bar();
 };
 frappe.views.Workspace.prototype.make_sidebar = function(){
     super_make_sidebar.call(this);
@@ -702,6 +724,3 @@ frappe.widget.widget_factory.onboarding.prototype.set_actions = function(){
         });
         dismiss.appendTo(this.action_area);
 };
-
-
-

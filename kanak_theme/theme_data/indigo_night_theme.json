@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Indigo Night",
+
+  "primary_color": "#1A237E",
+  "secondary_color": "#3F51B5",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#E8EAF6",
+  "list_subject_color": "#303F9F",
+  "date_picker_color": "#283593",
+
+  "sidebar_background_color": "#1A237E",
+  "sidebar_hover_color": "#303F9F",
+  "sidebar_font_color": "#E8EAF6",
+
+  "group_by_background_color": "#3F51B5",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#303F9F",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#1A237E",
+  "header_font_color": "#E8EAF6",
+  "header_breadcrumb_disabled_color": "#9FA8DA",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "Minimal Border Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#C5CAE9"
+}

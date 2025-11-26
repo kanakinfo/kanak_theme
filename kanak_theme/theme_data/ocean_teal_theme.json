@@ -1,0 +1,33 @@
+{
+  "doctype": "Themes",
+  "theme_name": "Ocean Teal",
+
+  "primary_color": "#004D4F",
+  "secondary_color": "#009688",
+  "secondary_font_color": "#FFFFFF",
+  "background_color": "#E0F2F1",
+  "list_subject_color": "#00796B",
+  "date_picker_color": "#006C6F",
+
+  "sidebar_background_color": "#004D4F",
+  "sidebar_hover_color": "#00796B",
+  "sidebar_font_color": "#E0F7F6",
+
+  "group_by_background_color": "#009688",
+  "group_by_font_color": "#FFFFFF",
+
+  "default_button_color": "#00897B",
+  "default_button_font_color": "#FFFFFF",
+
+  "header_background_color": "#004D4F",
+  "header_font_color": "#E0F7F6",
+  "header_breadcrumb_disabled_color": "#8FD6CF",
+
+  "list_style": "Card Material Theme",
+  "form_style": "APPLE CLEAN UI",
+  "font_family": "Inter",
+  "button_style": "3D Button",
+  "is_bg_auto":1,
+  "is_full_screen_menu": 0,
+  "menu_bg_for_full_screen": "#CFEDEA"
+}
