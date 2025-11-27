@@ -159,38 +159,40 @@ function apply_theme(theme_name) {
 const super_make_sidebar = frappe.views.Workspace.prototype.make_sidebar;
 
 frappe.views.Workspace.prototype.prepare_child_side_bar = function(){
-        let menuname = frappe.router.slug(this.get_page_to_show().name);
-        let menus = this.get_menu_with_children(menuname);
-        this.wrapper.find(".menuchild_layout-side-section").remove();
-        if (frappe.boot.is_full_screen_menu && menus.length > 1) {
-            let sidebar = $(`
-                <div class="col-lg-2 menuchild_layout-side-section">
-                    <div class="child-menu-wrapper"></div>
-                </div>
-            `);
-            this.wrapper.find(".layout-side-section").after(sidebar);
-            let child_container = sidebar.find(".child-menu-wrapper");
-            menus.forEach(slug => {
-                child_container.append(`
-                    <div class="child-menu-item" data-slug="${slug}">
-                        <span>${this.get_menu_label(slug)}</span>
+        if(this.all_pages != undefined){
+            let menuname = frappe.router.slug(this.get_page_to_show().name);
+            let menus = this.get_menu_with_children(menuname);
+            this.wrapper.find(".menuchild_layout-side-section").remove();
+            if (frappe.boot.is_full_screen_menu && menus.length > 1) {
+                let sidebar = $(`
+                    <div class="col-lg-2 menuchild_layout-side-section">
+                        <div class="child-menu-wrapper"></div>
                     </div>
                 `);
-            });
-            let current_slug = frappe.router.slug(menuname);
-            child_container.find(`[data-slug="${current_slug}"]`).addClass("active");
-            child_container.on("click", ".child-menu-item", (e) => {
-                let item = $(e.currentTarget);
-                let slug = $(e.currentTarget).data("slug");
-                child_container.find(".child-menu-item").removeClass("active");
-                item.addClass("active");
-                let is_private = this.is_private_workspace(slug);
-                if (is_private) {
-                    frappe.set_route(`/private/${slug}`);
-                } else {
-                    frappe.set_route(slug);
-                }
-            });
+                this.wrapper.find(".layout-side-section").after(sidebar);
+                let child_container = sidebar.find(".child-menu-wrapper");
+                menus.forEach(slug => {
+                    child_container.append(`
+                        <div class="child-menu-item" data-slug="${slug}">
+                            <span>${this.get_menu_label(slug)}</span>
+                        </div>
+                    `);
+                });
+                let current_slug = frappe.router.slug(menuname);
+                child_container.find(`[data-slug="${current_slug}"]`).addClass("active");
+                child_container.on("click", ".child-menu-item", (e) => {
+                    let item = $(e.currentTarget);
+                    let slug = $(e.currentTarget).data("slug");
+                    child_container.find(".child-menu-item").removeClass("active");
+                    item.addClass("active");
+                    let is_private = this.is_private_workspace(slug);
+                    if (is_private) {
+                        frappe.set_route(`/private/${slug}`);
+                    } else {
+                        frappe.set_route(slug);
+                    }
+                });
+            }
         }
 };
 frappe.views.Workspace.prototype.get_menu_with_children = function(menu_name){

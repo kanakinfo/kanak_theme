@@ -1200,4 +1200,20 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     }
   }
 }
-
+.language_switcher_knk_theme{
+    border: 1px solid;
+    padding: 4px 7px;
+    border-radius: 50px !important;
+    border-color: var(--header_font_color, #000000);
+    svg{
+        stroke: var(--header_font_color, #000000);
+    }
+    .dropdown-menu{
+      min-width: 115px;
+      .dropdown-item{
+        svg{
+          stroke: black;
+        }
+      }
+    }
+}

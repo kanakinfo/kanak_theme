@@ -24,6 +24,7 @@
   "default_button_font_color",
   "header_settings_section",
   "header_background_color",
+  "enable_language_switcher",
   "column_break_iusw",
   "header_font_color",
   "header_breadcrumb_disabled_color",
@@ -243,12 +244,18 @@
    "fieldname": "is_bg_auto",
    "fieldtype": "Check",
    "label": "Is BG Auto"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_language_switcher",
+   "fieldtype": "Check",
+   "label": "Enable Language Switcher"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-26 18:09:38.594224",
+ "modified": "2025-11-27 11:09:23.790383",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

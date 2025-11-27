@@ -119,6 +119,7 @@ def get_is_full_screen_menu_or_not(bootinfo):
     theme = get_active_theme()
     if theme:
         bootinfo['is_full_screen_menu'] = theme.as_dict().is_full_screen_menu
+        bootinfo['enable_language_switcher'] = theme.as_dict().enable_language_switcher or 0
 
 
 def get_context(context):
