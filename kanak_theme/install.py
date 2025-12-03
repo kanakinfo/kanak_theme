@@ -4,9 +4,21 @@ import json
 
 
 def after_install():
+    extend_limit()
     create_system_settings_theme_field()
     import_themes_from_json()
     add_standard_navbar_items()
+
+
+def extend_limit():
+    dt = frappe.get_doc("DocType", "List View Settings")
+
+    for df in dt.fields:
+        if df.fieldname == "total_fields":
+            df.options = "\n" + "\n".join(str(i) for i in range(4, 31))
+            break
+
+    dt.save(ignore_permissions=True)
 
 
 def import_themes_from_json():
