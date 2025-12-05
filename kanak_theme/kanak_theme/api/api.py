@@ -1,6 +1,10 @@
+from __future__ import unicode_literals
 import frappe
+from frappe import _
 import json
 from frappe.utils import cint
+from frappe.permissions import has_permission
+from frappe.utils import now
 
 
 def build_where_clause(filters):
@@ -144,3 +148,63 @@ def apply_theme(theme):
     frappe.db.set_value("User", user, "theme", theme)
     frappe.db.commit()
     return True
+
+@frappe.whitelist()
+def list_notes():
+    """Return list of Sticky Note docs for current user."""
+    user = frappe.session.user
+    notes = frappe.get_all("Sticky Note",
+                          filters={"owner": user},
+                          fields=["name", "title", "content", "x", "y", "width", "height", "z_index", "visible", "pinned", "color", "creation", "modified"])
+    return notes
+
+@frappe.whitelist()
+def create_note(title="", content="", x=0, y=0, width=250, height=200, color="#fff380", pinned=0, visible=1):
+    user = frappe.session.user
+    doc = frappe.new_doc("Sticky Note")
+    doc.title = title or ""
+    doc.content = content or ""
+    doc.x = float(x) if x else 0
+    doc.y = float(y) if y else 0
+    doc.width = float(width) if width else 250
+    doc.height = float(height) if height else 200
+    doc.color = color or "#fff380"
+    doc.pinned = int(pinned)
+    doc.visible = int(visible)
+    doc.insert(ignore_permissions=True)
+    frappe.db.commit()
+    return doc.as_dict()
+
+@frappe.whitelist()
+def update_note(name, **kwargs):
+    """Update fields of a note. Only owner may update."""
+    user = frappe.session.user
+    doc = frappe.get_doc("Sticky Note", name)
+    if doc.owner != user and not frappe.has_permission("Sticky Note", "write"):
+        frappe.throw(_("Not permitted"))
+    for k, v in kwargs.items():
+        if k in ("title","content","color"):
+            setattr(doc, k, v)
+        elif k in ("x","y","width","height"):
+            try:
+                setattr(doc, k, float(v))
+            except:
+                pass
+        elif k in ("z_index","pinned","visible"):
+            try:
+                setattr(doc, k, int(v))
+            except:
+                pass
+    doc.save(ignore_permissions=True)
+    frappe.db.commit()
+    return doc.as_dict()
+
+@frappe.whitelist()
+def delete_note(name):
+    user = frappe.session.user
+    doc = frappe.get_doc("Sticky Note", name)
+    if doc.owner != user and not frappe.has_permission("Sticky Note", "delete"):
+        frappe.throw(_("Not permitted"))
+    doc.delete()
+    frappe.db.commit()
+    return {"deleted": True}
