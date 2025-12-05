@@ -23,9 +23,11 @@ app_license = "mit"
 
 # Includes in <head>
 # ------------------
-
 # include js, css files in header of desk.html
-app_include_css = "kanak_theme.bundle.css"
+app_include_css = [
+    "/assets/kanak_theme/css/jquery-ui.min.css",
+    "kanak_theme.bundle.css"
+]
 app_include_js = "kanak_theme.bundle.js"
 
 # include js, css files in header of web template
