@@ -2,7 +2,6 @@ import GridRowForm from "./grid_row_form";
 
 export default class GridRow {
 	constructor(opts) {
-		debugger;
 		this.on_grid_fields_dict = {};
 		this.on_grid_fields = [];
 		$.extend(this, opts);
