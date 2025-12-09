@@ -1,4 +1,16 @@
 <div class="sticky-top theme_header_cl container">
+		{% if frappe.boot.sysdefaults.enable_announcement != '0' %}
+		<marquee
+		      class="announcement_main_cl"
+			  scrollamount="{{ frappe.boot.sysdefaults.mq_scrollamount }}"
+			  scrolldelay="{{ frappe.boot.sysdefaults.mq_scrolldelay }}"
+			  behavior="{{ frappe.boot.sysdefaults.mq_behavior }}"
+			  direction="{{ frappe.boot.sysdefaults.mq_direction }}"
+			  style="background-color: {{ frappe.boot.sysdefaults.mq_bgcolor }};"
+			>
+			  {{ frappe.boot.sysdefaults.announcement_text }}
+			</marquee>
+		{% endif %}
 	<header class="navbar container navbar-expand" role="navigation">
 		<div class="container">
 			<ul class="nav navbar-nav">
