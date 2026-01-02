@@ -5,7 +5,6 @@
     "name": "Language-is_show_in_lang_switcher",
     "fieldname": "is_show_in_lang_switcher",
     "fieldtype": "Check",
-    "options": "",
     "label": "Is Show in Lang Switcher",
     "insert_after": "flag"
 }]
