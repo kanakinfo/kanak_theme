@@ -304,6 +304,7 @@
 
 		.form-control:focus {
 			border-color: $text-muted;
+			z-index: auto;
 		}
 
 		.has-error .form-control {
@@ -668,6 +669,7 @@
 	background-color: var(--subtle-accent);
 	border-radius: var(--border-radius-md);
 	border: 1px solid var(--table-border-color);
+	overflow-y: hidden;
 	.form-grid {
 		display: grid;
 		grid-auto-rows: min-content;

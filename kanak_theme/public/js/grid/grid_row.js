@@ -1034,65 +1034,46 @@ export default class GridRow {
 
 			input_field.trigger("focus");
 		}
-				var $col = $(
-			'<div class="col grid-static-col col-xs-' + colsize + " " + add_class + '"></div>'
+		let is_focused = false;
+
+		var $col = $(
+			`<div class="col grid-static-col col-xs-${colsize} ${add_class}" style="${add_style}"></div>`
 		)
 			.attr("data-fieldname", df.fieldname)
 			.attr("data-fieldtype", df.fieldtype)
 			.data("df", df)
 			.appendTo(this.row)
-			// initialize grid for horizontal scroll on mobile devices.
-			.on("touchstart", function (event) {
-				grid_container = $(event.currentTarget).closest(".form-grid-container")[0];
-				grid = $(event.currentTarget).closest(".form-grid")[0];
+			.on("focusin", function (event) {
+				if (is_focused) return;
+				is_focused = true;
+				if (df.fieldtype === "Link" || df.fieldtype === "Dynamic Link") {
+					frappe.utils.sleep(300).then(() => {
+						let $dropdown = $(this).find(".awesomplete > ul:first-of-type");
+						let $grid_field = $dropdown.closest(".grid-field");
 
-				grid.style.position != "relative" && $(grid).css("position", "relative");
-				!grid.style.left && $(grid).css("left", 0);
+						if ($grid_field.length) {
+							let $wrapper = $grid_field.find("div.awesomplete");
+							$wrapper = $(
+								`<div class="awesomplete ${$dropdown.attr("id")}"></div>`
+							);
+							$grid_field.append($wrapper);
+							$wrapper.append($dropdown);
 
-				start_x = event.touches[0].clientX;
-				start_y = event.touches[0].clientY;
+							let element_position = event.target.getBoundingClientRect();
 
-				inital_position_x = -parseFloat(grid.style.left || 0) + start_x;
-			})
-			// calculate X and Y movement based on touch events.
-			.on("touchmove", function (event) {
-				if (input_in_focus) return;
-
-				let moved_x;
-				let moved_y;
-
-				if (!horizontal && !vertical) {
-					moved_x = Math.abs(start_x - event.touches[0].clientX);
-					moved_y = Math.abs(start_y - event.touches[0].clientY);
+							let left_difference =
+								element_position.left - $grid_field.offset().left;
+							let top_difference =
+								element_position.top - $grid_field.offset().top + 30;
+							$wrapper.css({
+								position: "absolute",
+								top: `${top_difference + 10}px`,
+								left: `${left_difference}px`,
+								width: "250px",
+							});
+						}
+					});
 				}
-
-				if (!vertical && moved_x > 16) {
-					horizontal = true;
-				} else if (!horizontal && moved_y > 16) {
-					vertical = true;
-				}
-				if (horizontal) {
-					event.preventDefault();
-
-					let grid_start = inital_position_x - event.touches[0].clientX;
-					let grid_end = grid.clientWidth - grid_container.clientWidth + 2;
-
-					if (frappe.utils.is_rtl()) {
-						grid_start = -grid_start;
-					}
-
-					if (grid_start < 0) {
-						grid_start = 0;
-					} else if (grid_start > grid_end) {
-						grid_start = grid_end;
-					}
-
-					grid.style.left = `${frappe.utils.is_rtl() ? "" : "-"}${grid_start}px`;
-				}
-			})
-			.on("touchend", function () {
-				vertical = false;
-				horizontal = false;
 			})
 			.on("click", function (event) {
 				if (frappe.ui.form.editable_row !== me) {
