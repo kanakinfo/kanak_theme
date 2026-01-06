@@ -1035,7 +1035,6 @@ export default class GridRow {
 			input_field.trigger("focus");
 		}
 		let is_focused = false;
-
 		var $col = $(
 			`<div class="col grid-static-col col-xs-${colsize} ${add_class}" style="${add_style}"></div>`
 		)
@@ -1060,11 +1059,10 @@ export default class GridRow {
 							$wrapper.append($dropdown);
 
 							let element_position = event.target.getBoundingClientRect();
-
+							let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 							let left_difference =
 								element_position.left - $grid_field.offset().left;
-							let top_difference =
-								element_position.top - $grid_field.offset().top + 30;
+							let top_difference = element_position.top + scrollTop - $grid_field.offset().top + 30;
 							$wrapper.css({
 								position: "absolute",
 								top: `${top_difference + 10}px`,

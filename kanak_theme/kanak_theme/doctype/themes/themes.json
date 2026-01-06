@@ -24,7 +24,6 @@
   "default_button_font_color",
   "header_settings_section",
   "header_background_color",
-  "enable_language_switcher",
   "column_break_iusw",
   "header_font_color",
   "header_breadcrumb_disabled_color",
@@ -35,6 +34,9 @@
   "column_break_tbwa",
   "font_family",
   "button_style",
+  "theme_languages_section",
+  "enable_language_switcher",
+  "language_switcher_languages",
   "menu_settings_section",
   "is_full_screen_menu",
   "menu_bg_img_for_full_screen",
@@ -250,12 +252,24 @@
    "fieldname": "enable_language_switcher",
    "fieldtype": "Check",
    "label": "Enable Language Switcher"
+  },
+  {
+   "fieldname": "theme_languages_section",
+   "fieldtype": "Section Break",
+   "label": "Theme Languages"
+  },
+  {
+   "depends_on": "eval:doc.enable_language_switcher",
+   "fieldname": "language_switcher_languages",
+   "fieldtype": "Table",
+   "label": "Languages",
+   "options": "Theme Language"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-27 11:09:23.790383",
+ "modified": "2026-01-06 12:28:59.458025",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

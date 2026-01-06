@@ -115,11 +115,35 @@ def apply_theme_menu(theme_doc, allowed_workspaces):
     return allowed_workspaces
 
 
+def get_theme_language_list():
+    theme = get_active_theme()
+    if not theme or not theme.as_dict().enable_language_switcher:
+        return []
+
+    lang_codes = [
+        row.language
+        for row in (theme.as_dict().language_switcher_languages or [])
+        if row.language
+    ]
+
+    if not lang_codes:
+        return []
+
+    return frappe.get_all(
+        "Language",
+        filters={"name": ["in", lang_codes]},
+        fields=["name", "language_name"],
+        order_by="language_name asc"
+    )
+
+
 def get_is_full_screen_menu_or_not(bootinfo):
     theme = get_active_theme()
     if theme:
         bootinfo['is_full_screen_menu'] = theme.as_dict().is_full_screen_menu
         bootinfo['enable_language_switcher'] = theme.as_dict().enable_language_switcher or 0
+        bootinfo['theme_lanagues'] = get_theme_language_list()
+
 
 
 def get_context(context):

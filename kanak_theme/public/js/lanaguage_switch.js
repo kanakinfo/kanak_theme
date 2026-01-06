@@ -3,8 +3,11 @@ frappe.provide("frappe.language_switcher");
 frappe.language_switcher = {
 	init: function () {
 		// Add language switcher icon to navbar
-		this.create_language_switcher();
-		this.bind_events();
+		if(frappe.boot.enable_language_switcher){
+			this.create_language_switcher();
+			this.bind_events();
+		}
+		
 	},
 
 	create_language_switcher: function () {
@@ -29,38 +32,27 @@ frappe.language_switcher = {
 	},
 
 	populate_languages: async function () {
-		await frappe.call({
-			method: "frappe.client.get_list",
-			args: {
-				doctype: "Language",
-				filters: {
-					is_show_in_lang_switcher: 1,
-				},
-				fields: ["name", "language_name"],
-			},
-			callback: (response) => {
-				const languages = response.message || [];
-				const dropdown_content = $("#languages_dropdown");
 
-				for (const lang of languages) {
-					const is_active = lang.name === frappe.boot.lang;
-					const lang_item = $(`
-                        <a class="dropdown-item language-switcher" href="javascript:;" data-lang_code="${lang.name}">
-                            ${lang.language_name}
-							${is_active ? `
-				               <span class="lang-check pull-right">
-				                   <svg class="es-icon icon-sm text-primary">
-				                       <use href="#es-line-check"></use>
-				                   </svg>
-				               </span>
-				           ` : ""}
-                        </a>
-                    `);
+		const languages = frappe.boot.theme_lanagues || [];
+		const dropdown_content = $("#languages_dropdown");
 
-					dropdown_content.prepend(lang_item);
-				}
-			},
-		});
+		for (const lang of languages) {
+			const is_active = lang.name === frappe.boot.lang;
+			const lang_item = $(`
+                <a class="dropdown-item language-switcher" href="javascript:;" data-lang_code="${lang.name}">
+                    ${lang.language_name}
+					${is_active ? `
+		               <span class="lang-check pull-right">
+		                   <svg class="es-icon icon-sm text-primary">
+		                       <use href="#es-line-check"></use>
+		                   </svg>
+		               </span>
+		           ` : ""}
+                </a>
+            `);
+
+			dropdown_content.prepend(lang_item);
+		}
 	},
 
 	bind_events: function () {
