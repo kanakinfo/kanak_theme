@@ -38,7 +38,6 @@
     "fieldtype": "Int",
     "label": "Scroll Amount",
     "default": "6",
-    "reqd": 1,
     "description": "Amount of scrolling per movement in pixels. Higher value = faster speed.",
     "insert_after": "announcement_text",
     "depends_on": "eval:doc.enable_announcement"
@@ -53,7 +52,6 @@
     "label": "Scroll Behavior",
     "options": "scroll\nslide\nalternate",
     "default": "scroll",
-    "reqd": 1,
     "description": "Defines how the marquee moves.",
     "insert_after": "mq_scrollamount",
     "depends_on": "eval:doc.enable_announcement"
@@ -68,7 +66,6 @@
     "label": "Scroll Direction",
     "options": "left\nright\nup\ndown",
     "default": "left",
-    "reqd": 1,
     "description": "Direction of marquee scrolling.",
     "insert_after": "mq_behavior",
     "depends_on": "eval:doc.enable_announcement"

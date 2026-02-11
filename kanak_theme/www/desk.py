@@ -1,8 +1,8 @@
-# Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
+# Copyright (c) 2026, Kanak Infosystems LLP. and Contributors
 # License: MIT. See LICENSE
 import frappe
 from frappe import _
-from frappe.www import app
+from frappe.www import desk
 from kanak_theme.utils.theme import get_active_theme
 
 def hex_to_rgba(hex_color, alpha):
@@ -55,19 +55,6 @@ def adjust_color(hex_color, percentage):
         b = clamp(round(b * (1 - p / 100)))
 
     return "#{:02x}{:02x}{:02x}".format(r, g, b)
-
-# def lighten_hex(hex_color, percentage):
-#     hex_color = hex_color.lstrip('#')
-#     r = int(hex_color[0:2], 16)
-#     g = int(hex_color[2:4], 16)
-#     b = int(hex_color[4:6], 16)
-
-#     r = round(r + (255 - r) * (percentage / 100))
-#     g = round(g + (255 - g) * (percentage / 100))
-#     b = round(b + (255 - b) * (percentage / 100))
-
-#     return "#{:02x}{:02x}{:02x}".format(r, g, b)
-
 
 def generate_shadow_color(primary_hex):
     gray_hex = adjust_color(primary_hex, 50)   # convert black → gray (#7C7C7C approx)
@@ -147,9 +134,9 @@ def get_is_full_screen_menu_or_not(bootinfo):
 
 
 def get_context(context):
-    context = app.get_context(context)
+    context = desk.get_context(context)
     boot = frappe.sessions.get()
-    allowed_workspaces = boot.get('allowed_workspaces', [])
+    # allowed_workspaces = boot.get('allowed_workspaces', [])
     company_name = frappe.defaults.get_user_default("company")
     company_logo = None
     if company_name:
@@ -160,7 +147,7 @@ def get_context(context):
             pass
     theme = get_active_theme()
     if theme:
-        allowed_workspaces = apply_theme_menu(theme, allowed_workspaces)
+        # allowed_workspaces = apply_theme_menu(theme, allowed_workspaces)
         primary_color = theme.as_dict().primary_color or '#000000'
         secondary_color = theme.as_dict().secondary_color or '#F2F2F2'
         background_color = theme.as_dict().background_color or '#ffffff'
@@ -215,7 +202,7 @@ def get_context(context):
                 "bg-color": adjust_color(background_color, 70),
             })
         context.update({
-            'allowed_workspaces': allowed_workspaces,
+            # 'allowed_workspaces': allowed_workspaces,
             "company_name": company_name or _("No Company"),
             "company_logo": company_logo,
             "kanak_theme": theme.as_dict() if theme else {},
@@ -228,7 +215,7 @@ def get_context(context):
         })
     else:
         shadow_hex, shadow_rgba = generate_shadow_color('#000000')
-        allowed_workspaces = apply_theme_menu(theme, allowed_workspaces)
+        # allowed_workspaces = apply_theme_menu(theme, allowed_workspaces)
         theme_list = {
             "primary": '#000000',
             "btn-primary": '#000000',
@@ -260,7 +247,6 @@ def get_context(context):
         }
 
         context.update({
-            'allowed_workspaces': allowed_workspaces,
             "company_name": company_name or _("No Company"),
             "company_logo": company_logo,
             "kanak_theme": theme.as_dict() if theme else 'default',

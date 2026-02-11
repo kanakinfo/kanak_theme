@@ -4,22 +4,9 @@ import json
 
 
 def after_install():
-    extend_limit()
     create_system_settings_theme_field()
     import_themes_from_json()
     add_standard_navbar_items()
-
-
-def extend_limit():
-    dt = frappe.get_doc("DocType", "List View Settings")
-
-    for df in dt.fields:
-        if df.fieldname == "total_fields":
-            df.options = "\n" + "\n".join(str(i) for i in range(4, 31))
-            break
-
-    dt.save(ignore_permissions=True)
-
 
 def import_themes_from_json():
     theme_dir = frappe.get_app_path(
@@ -60,26 +47,6 @@ def create_system_settings_theme_field():
         custom_field.insert(ignore_permissions=True)
         frappe.db.commit()
 
-
-# def create_default_theme():
-#     if not frappe.db.exists("Themes", "Default Theme"):
-#         theme = frappe.get_doc({
-#             "doctype": "Themes",
-#             "theme_name": "Kanak Theme",
-#             "primary_color": "#4B7BEC",
-#             "secondary_color": "#A6B1E1",
-#             "sidebar_background_color": "#FFFFFF",
-#             "sidebar_hover_color": "#F1F1F1",
-#             "sidebar_font_color": "#333333",
-#         })
-#         theme.insert(ignore_permissions=True)
-
-
-# def set_default_theme():
-#     existing = frappe.db.get_single_value("System Settings", "theme")
-#     if not existing:
-#         frappe.db.set_single_value("System Settings", "theme", "Default Theme")
-#         frappe.db.commit()
 
 
 def add_standard_navbar_items():

@@ -21,9 +21,9 @@ body, .form-control, .page-form {
 .btn-light:focus, .btn-default:focus, .btn-light.focus, .focus.btn-default{
   box-shadow: 0 0 0 2px var(--shadow-color-rgba);
 }
-html, body{
-  background-color: var(--bg-background-color);
-}
+// html, body{
+//   background-color: var(--bg-background-color);
+// }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   color: var(--primary);
 }
@@ -498,29 +498,79 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     .list-row {
         background: white;
         transition: 0.2s ease;
+        .level-right{
+            background-color: white;
+            .icon {
+                stroke: var(--primary);
+            }
+            &:hover{
+              background-color: white;
+            }
+        }
     }
 
     .list-row:hover {
         transform: scale(1.01);
         background: #fafafa;
+        .level-right{
+          background: #fafafa;
+        }
+
+    }
+    .frappe-list header.list-row-head {
+      .level-right{
+          background-color: var(--primary);
+          .icon {
+              stroke: white;
+          }
+          &:hover{
+            background-color: var(--primary);
+          }
+      }
     }
 }
 [data-list-style='Apple-style UI']{
   .frappe-list .list-row {
       background: #fff;
       border: 1px solid #e5e5e5;
-      padding: 16px;
       border-radius: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 7px;
+      .level-right{
+          background-color: white;
+          .icon {
+              stroke: var(--primary);
+          }
+          &:hover{
+            background-color: white;
+          }
+      }
   }
   .frappe-list header.list-row-head {
       padding: 20px;
       border-radius: 12px;
       font-size: 15px;
       border-bottom: 2px solid #e8e8e8;
+      .level-right{
+          background-color: var(--primary);
+          .icon {
+              stroke: white;
+          }
+          &:hover{
+            background-color: var(--primary);
+          }
+      }
   }
   .list-row:hover {
       background: #fafafa;
+      .level-right{
+          background-color: #fafafa;
+          .icon {
+              stroke: var(--primary);
+          }
+          &:hover{
+            background-color: #fafafa;
+          }
+      }
   }
   .list-subject a {
       font-weight: 600;
@@ -531,7 +581,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   .frappe-list header.list-row-head {
       background: linear-gradient(90deg,var(--primary),var(--primary));
       color: white;
-      padding: 15px;
       border-radius: 10px;
       color: white !important;
       .level-item{
@@ -540,13 +589,30 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       use.like-icon{
         stroke: white;
       }
+      .level-right{
+          background-color: var(--primary);
+          .icon {
+              stroke: white;
+          }
+          &:hover{
+            background-color: var(--primary);
+          }
+      }
   }
   .frappe-list .list-row {
       background: #fff;
       border: 1px solid #dce3f0;
-      padding: 12px;
       margin-top: 10px;
       border-radius: 10px;
+      .level-right{
+          background-color: white;
+          .icon {
+              stroke: var(--primary);
+          }
+          &:hover{
+            background-color: white;
+          }
+      }
   }
   .list-row:hover {
       border-color: var(--primary);
@@ -751,7 +817,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       color: white;
     }
 }
-.frappe-list .result {
+.list-view .frappe-list .result-container .result {
     overflow-y: auto;
     height: calc(100vh - 300px);
 }

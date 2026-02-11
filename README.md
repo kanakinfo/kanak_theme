@@ -1,6 +1,6 @@
 ### Kanak Theme
 
- Custom Frappe Backend Theme
+Kanak Theme
 
 ### Installation
 
@@ -8,7 +8,7 @@ You can install this app using the [bench](https://github.com/frappe/bench) CLI:
 
 ```bash
 cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
+bench get-app $URL_OF_THIS_REPO --branch version-16
 bench install-app kanak_theme
 ```
 
@@ -22,14 +22,6 @@ pre-commit install
 ```
 
 Pre-commit is configured to use the following tools for checking and formatting your code:
-
-in feture request
-1] filter display direct by user list view
-2] quick entry show list view
-3] side bar icon changes
-4] sticky list bar 
-5] button style diffrents
-6] group by list view 
 
 - ruff
 - eslint

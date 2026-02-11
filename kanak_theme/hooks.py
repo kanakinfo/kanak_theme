@@ -1,7 +1,7 @@
 app_name = "kanak_theme"
 app_title = "Kanak Theme"
 app_publisher = "Kanak infosystems LLP."
-app_description = " Custom Frappe Backend Theme"
+app_description = "Kanak Theme"
 app_email = "info@kanakinfosystems.com"
 app_license = "mit"
 
@@ -23,6 +23,7 @@ app_license = "mit"
 
 # Includes in <head>
 # ------------------
+
 # include js, css files in header of desk.html
 app_include_css = [
     "/assets/kanak_theme/css/jquery-ui.min.css",
@@ -71,6 +72,9 @@ app_include_js = "kanak_theme.bundle.js"
 
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
+
+# automatically load and sync documents of this doctype from downstream apps
+# importable_doctypes = [doctype_1]
 
 # Jinja
 # ----------
@@ -127,14 +131,6 @@ after_install = "kanak_theme.install.after_install"
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
-# DocType Class
-# ---------------
-# Override standard doctype classes
-
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
-
 # Document Events
 # ---------------
 # Hook on document methods and events
@@ -172,6 +168,14 @@ after_install = "kanak_theme.install.after_install"
 # -------
 
 # before_tests = "kanak_theme.install.before_tests"
+
+# Extend DocType Class
+# ------------------------------
+#
+# Specify custom mixins to extend the standard doctype controller.
+# extend_doctype_class = {
+# 	"Task": "kanak_theme.custom.task.CustomTaskMixin"
+# }
 
 # Overriding Methods
 # ------------------------------
@@ -244,4 +248,8 @@ after_install = "kanak_theme.install.after_install"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
-extend_bootinfo = ["kanak_theme.www.app.get_is_full_screen_menu_or_not"]
+# Translation
+# ------------
+# List of apps whose translatable strings should be excluded from this app's translations.
+# ignore_translatable_strings_from = []
+
