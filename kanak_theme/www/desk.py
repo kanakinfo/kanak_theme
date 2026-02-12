@@ -192,7 +192,7 @@ def get_context(context):
             "header_background_color": theme.as_dict().header_background_color or '#ffffff',
             "header_font_color": theme.as_dict().header_font_color or '#383838',
             "header_breadcrumb_disabled_color": theme.as_dict().header_breadcrumb_disabled_color or '#7c7c7c',
-            "menu_bg_for_full_screen": theme.as_dict().menu_bg_for_full_screen or '#ffffff',
+            "menu_bg_for_full_screen": theme.as_dict().menu_bg_for_full_screen or '#ffffff'
         }
         is_bg_auto = theme.as_dict().is_bg_auto
         if is_bg_auto:
