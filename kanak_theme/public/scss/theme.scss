@@ -32,12 +32,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 .icon{
   --icon-stroke:var(--primary);
 }
-[data-is_full_screen_menu="0"]{
-  .theme_section_main{
-        margin-left: 78px;
-        background: var(--bg-background-color);
-  }
-}
 .theme_section_main{
     .page-head{
           background: var(--bg-background-color);
@@ -243,7 +237,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 
     .form-section .section-head {
         font-weight: 600;
-        color: #333;
+        color: var(--primary);
         margin: 10px 0;
     }
 
@@ -623,4 +617,175 @@ body.desk-loaded{
 }
 #page-desktop{
   background-color: var(--menu_bg_for_full_screen);
+
+}
+body.desk-loaded{
+  #page-desktop{
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: initial;
+    .desktop-icon{
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+    }
+  }
+}
+.page-head{
+  border-color:var(--bg-background-color);
+}
+.body-sidebar .dropdown-notifications{
+  .es-icon use, 
+  .icon use,{
+    --icon-stroke: var(--gray-700);
+    stroke: var(--gray-700);
+  }
+}
+.language_switcher_knk_theme{
+    padding: 4px 7px;
+    border-radius: 50px !important;
+    border-color: var(--side_font_color, #000000);
+    svg{
+        stroke: var(--side_font_color, #000000);
+    }
+    .dropdown-menu{
+      .dropdown-item{
+        svg{
+          stroke: black;
+        }
+      }
+    }
+}
+  .sn-overlay { 
+    position: fixed; inset: 0; pointer-events: none; z-index: 100000; 
+  }
+  
+  /* Note card */
+  .sn-note {
+    position: absolute;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    border-radius: 8px;
+    overflow: hidden;
+    pointer-events: auto;
+    font-family: 'Arial', sans-serif;
+    transition: box-shadow 0.2s ease;
+  }
+  .sn-note.sn-dragging { box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+
+  /* Header */
+  .sn-note .sn-header {
+    padding: 6px 10px;
+    cursor: move;
+    font-weight: bold;
+    font-style: italic;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  /* Title text */
+  .sn-note .sn-title { flex: 1; word-break: break-word; }
+
+  /* Body */
+  .sn-note .sn-body {
+    padding: 8px;
+    min-height: 50px;
+    max-height: 400px;
+    overflow-y: auto;
+    resize: none;
+    background: rgba(255,255,255,0.9);
+    font-style: italic;
+  }
+
+  /* Controls */
+  .sn-note .sn-controls {
+    margin-left:auto;
+    display:flex;
+    gap:6px;
+    align-items:center;
+  }
+  .sn-btn {
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    padding:4px;
+    font-size:14px;
+    transition: transform 0.1s ease;
+  }
+  .sn-btn:hover { transform: scale(1.2); }
+  /* Resize handle */
+  .sn-resize-handle {
+    position:absolute;
+    right:6px;
+    bottom:6px;
+    width:16px;
+    height:16px;
+    cursor: se-resize;
+    opacity:0.6;
+  }
+    .sn-body:focus {
+        outline: none; /* blue outline */
+        outline-offset: -2px;        /* optional: makes outline inside the box */
+        box-shadow: 0 0 6px rgba(30,144,255,0.6); /* subtle glow effect */
+    }
+    .sn-note.editing {
+        box-shadow: 0 8px 20px rgba(30,144,255,0.4);
+    }
+    .sn-fab {
+  position: fixed;
+  right: 12px;
+  bottom: 20px;
+  z-index: 100001;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 42px;
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+
+.sn-fab:hover {
+  width: 180px;
+}
+
+/* Button */
+.sn-fab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 18px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.sn-fab-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.sn-fab-icon {
+  font-size: 18px;
+  width: 22px;
+  text-align: center;
+}
+
+.sn-fab-label {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sn-fab:hover .sn-fab-label {
+  opacity: 1;
 }

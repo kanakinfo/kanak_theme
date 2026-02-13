@@ -138,7 +138,7 @@ def get_themes():
     return frappe.get_all(
         "Themes",
         fields=["name", "theme_name", "primary_color", "secondary_color",
-                "background_color", "default_button_color", "sidebar_background_color", "header_background_color"]
+                "background_color", "default_button_color", "sidebar_background_color"]
     )
 
 

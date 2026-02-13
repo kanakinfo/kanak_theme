@@ -33,7 +33,6 @@ frappe.ui.toolbar.add_theme_menu_item = function () {
                             <span class="themepicker__swatch" style="background:${theme.primary_color}; border:2px solid #fff;"></span>
                             <span class="themepicker__swatch" style="background:${theme.secondary_color}; border:2px solid #fff;"></span>
                             <span class="themepicker__swatch" style="background:${theme.background_color}" border:2px solid #fff;"></span>
-                            <span class="themepicker__swatch" style="background:${theme.header_background_color}" border:2px solid #fff;"></span>
                             <span class="themepicker__swatch" style="background:${theme.default_button_color}" border:2px solid #fff;"></span>
                             <span class="themepicker__swatch" style="background:${theme.sidebar_background_color}" border:2px solid #fff;"></span>
                         </span>
@@ -82,18 +81,29 @@ function apply_theme(theme_name) {
         }
     });
 }
+
 function updateBodyClass() {
         if (frappe.get_route()[0] === '' || document.querySelector('#page-desktop')) {
             document.body.classList.add("desk-loaded");
+            const cssVar = getComputedStyle(document.documentElement)
+            .getPropertyValue('--menu_bg_img_for_full_screen')
+            .trim();
+            if (cssVar && cssVar !== 'none') {
+                $("#page-desktop").css('background-image', `url("${cssVar}")`);
+
+            }
+
         } else {
             document.body.classList.remove("desk-loaded");
+            document.body.style.backgroundImage = "none";
         }
 }
 
-    // On first load
-    
+frappe.after_ajax(() => {
+    setTimeout(updateBodyClass, 80);
+});
 frappe.router.on('change', () => {
-  updateBodyClass();
+    setTimeout(updateBodyClass, 80);
 });
 frappe.ui.form.ControlCheck = class ControlCheckToggle extends frappe.ui.form.ControlData {
     static html_element = "input";

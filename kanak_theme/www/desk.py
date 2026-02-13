@@ -61,47 +61,6 @@ def generate_shadow_color(primary_hex):
     rgba = hex_to_rgba(gray_hex, 0.25)        # add opacity
     return gray_hex, rgba
 
-
-def apply_theme_menu(theme_doc, allowed_workspaces):
-    """
-    Apply Theme Menu settings to workspace list.
-    theme_doc = Theme doctype (doc)
-    allowed_workspaces = list of workspace dicts
-    """
-    if frappe.db.exists("Themes", theme_doc):
-        theme_rows = theme_doc.table_mogv or []
-
-        # Convert Theme Menu table → Lookup dictionary
-        if theme_rows:
-            theme_map = {
-                row.menu: {
-                    "use_image": row.use_image_as_icon,
-                    "icon": row.icon,
-                    "image": row.image_icon
-                }
-                for row in theme_rows
-            }
-
-        # Modify allowed workspaces in-place
-            for ws in allowed_workspaces:
-                ws_name = ws.get("name")
-                cfg = theme_map.get(ws_name)
-
-                if not cfg:
-                    continue
-                if cfg["use_image"] and cfg["image"]:
-                    ws["image"] = cfg["image"]
-                    ws["icon"] = None
-                    continue
-
-                # (2) Use Icon
-                if cfg["icon"]:
-                    ws["icon"] = cfg["icon"]
-                    ws["image"] = None
-                    continue
-    return allowed_workspaces
-
-
 def get_theme_language_list():
     theme = get_active_theme()
     if not theme or not theme.as_dict().enable_language_switcher:
@@ -127,7 +86,6 @@ def get_theme_language_list():
 def get_is_full_screen_menu_or_not(bootinfo):
     theme = get_active_theme()
     if theme:
-        bootinfo['is_full_screen_menu'] = theme.as_dict().is_full_screen_menu
         bootinfo['enable_language_switcher'] = theme.as_dict().enable_language_switcher or 0
         bootinfo['theme_lanagues'] = get_theme_language_list()
 
@@ -189,11 +147,13 @@ def get_context(context):
             "default_color_dark": adjust_color(default_button_color or '#F2F2F2', -50),
             "date_picker_color": theme.as_dict().date_picker_color or '#000000',
             "date_picker_color_light": adjust_color(theme.as_dict().date_picker_color or '#000000', 96),
-            "header_background_color": theme.as_dict().header_background_color or '#ffffff',
-            "header_font_color": theme.as_dict().header_font_color or '#383838',
-            "header_breadcrumb_disabled_color": theme.as_dict().header_breadcrumb_disabled_color or '#7c7c7c',
             "menu_bg_for_full_screen": theme.as_dict().menu_bg_for_full_screen or '#ffffff'
         }
+        menu_bg_img_for_full_screen = theme.as_dict().menu_bg_img_for_full_screen
+        if menu_bg_img_for_full_screen:
+            theme_list.update({
+                "menu_bg_img_for_full_screen": '/assets/kanak_theme' + theme.as_dict().menu_bg_img_for_full_screen or '',
+            })
         is_bg_auto = theme.as_dict().is_bg_auto
         if is_bg_auto:
             theme_list.update({
@@ -209,13 +169,10 @@ def get_context(context):
             "theme_list": theme_list,
             "list_style": theme.as_dict().list_style,
             "form_style": theme.as_dict().form_style,
-            "button_style": theme.as_dict().button_style,
-            "is_full_screen_menu": theme.as_dict().is_full_screen_menu,
-            "menu_bg_img_for_full_screen": theme.as_dict().menu_bg_img_for_full_screen or '',
+            "button_style": theme.as_dict().button_style
         })
     else:
         shadow_hex, shadow_rgba = generate_shadow_color('#000000')
-        # allowed_workspaces = apply_theme_menu(theme, allowed_workspaces)
         theme_list = {
             "primary": '#000000',
             "btn-primary": '#000000',
@@ -243,7 +200,7 @@ def get_context(context):
             "header_background_color": '#ffffff',
             "header_font_color": '#383838',
             "header_breadcrumb_disabled_color": '#7c7c7c',
-            "menu_bg_for_full_screen": '#ffffff',
+            "menu_bg_for_full_screen": '#ffffff'
         }
 
         context.update({
@@ -253,8 +210,6 @@ def get_context(context):
             "theme_list": theme_list,
             "list_style": theme.as_dict().list_style if theme else 'None',
             "form_style": theme.as_dict().form_style if theme else 'None',
-            "button_style": theme.as_dict().button_style if theme else 'None',
-            "is_full_screen_menu": 0,
+            "button_style": theme.as_dict().button_style if theme else 'None'
         })
-
     return context

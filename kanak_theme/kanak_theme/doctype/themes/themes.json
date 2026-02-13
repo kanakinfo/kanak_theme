@@ -22,11 +22,6 @@
   "group_by_font_color",
   "default_button_color",
   "default_button_font_color",
-  "header_settings_section",
-  "header_background_color",
-  "column_break_iusw",
-  "header_font_color",
-  "header_breadcrumb_disabled_color",
   "styles_section",
   "form_style",
   "list_style",
@@ -38,10 +33,8 @@
   "enable_language_switcher",
   "language_switcher_languages",
   "menu_settings_section",
-  "is_full_screen_menu",
   "menu_bg_img_for_full_screen",
-  "menu_bg_for_full_screen",
-  "table_mogv"
+  "menu_bg_for_full_screen"
  ],
  "fields": [
   {
@@ -128,12 +121,6 @@
    "label": "Menu Settings"
   },
   {
-   "fieldname": "table_mogv",
-   "fieldtype": "Table",
-   "label": "Menu Icons",
-   "options": "Theme Menu"
-  },
-  {
    "default": "#a3a3c2",
    "fieldname": "group_by_background_color",
    "fieldtype": "Color",
@@ -196,46 +183,11 @@
    "label": "Date Picker Color"
   },
   {
-   "fieldname": "header_settings_section",
-   "fieldtype": "Section Break",
-   "label": "Header Settings"
-  },
-  {
-   "default": "#ffffff",
-   "fieldname": "header_background_color",
-   "fieldtype": "Color",
-   "label": "Header Background Color"
-  },
-  {
-   "fieldname": "column_break_iusw",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "#383838",
-   "fieldname": "header_font_color",
-   "fieldtype": "Color",
-   "label": "Header Font Color"
-  },
-  {
-   "default": "#7c7c7c",
-   "fieldname": "header_breadcrumb_disabled_color",
-   "fieldtype": "Color",
-   "label": "Header Breadcrumb Disabled color"
-  },
-  {
-   "default": "0",
-   "fieldname": "is_full_screen_menu",
-   "fieldtype": "Check",
-   "label": "Is Full screen Menu"
-  },
-  {
-   "depends_on": "eval:doc.is_full_screen_menu",
    "fieldname": "menu_bg_img_for_full_screen",
    "fieldtype": "Attach Image",
    "label": "Menu BG Img For Full Screen"
   },
   {
-   "depends_on": "eval:doc.is_full_screen_menu",
    "fieldname": "menu_bg_for_full_screen",
    "fieldtype": "Color",
    "label": "Menu BG for Full Screen"
@@ -269,7 +221,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-06 12:28:59.458025",
+ "modified": "2026-02-13 12:54:52.055286",
  "modified_by": "Administrator",
  "module": "Kanak Theme",
  "name": "Themes",

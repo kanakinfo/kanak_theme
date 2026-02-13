@@ -252,4 +252,5 @@ after_install = "kanak_theme.install.after_install"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
+extend_bootinfo = ["kanak_theme.www.desk.get_is_full_screen_menu_or_not"]
 

@@ -143,9 +143,9 @@ Desk Sticky Notes Overlay
   opacity: 1;
 }
   `;
-  const style = document.createElement('style');
-  style.innerHTML = css;
-  document.head.appendChild(style);
+  // const style = document.createElement('style');
+  // style.innerHTML = css;
+  // document.head.appendChild(style);
 
   // ----- Overlay -----
   const overlay = document.createElement('div');
