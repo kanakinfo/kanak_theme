@@ -49,7 +49,7 @@
 		  <div class="inner three"></div>
 		</div>
 	</div>
-	<body class="kanak_theme_main_cl">
+	<body class="kanak_theme_main_cl {% if boot.sysdefaults.enable_announcement %}enable_announcement_cl{% endif %}">
 		{% include "templates/includes/splash_screen.html" %}
 		<div class="main-section">
 			{% if not is_full_screen_menu %}
