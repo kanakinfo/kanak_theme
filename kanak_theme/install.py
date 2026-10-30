@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 import os
 import json
 
@@ -21,6 +22,21 @@ def extend_limit():
     dt.save(ignore_permissions=True)
 
 
+def safe_join_path(base_dir, filename):
+    """Join ``filename`` to ``base_dir`` and ensure the result stays inside it.
+
+    Prevents path traversal (e.g. ``../secrets.json``) when reading bundled
+    theme files. Raises ``frappe.ValidationError`` for unsafe paths.
+    """
+    base_abs = os.path.abspath(base_dir)
+    target_abs = os.path.abspath(os.path.join(base_abs, os.path.basename(filename)))
+
+    if os.path.commonpath([base_abs, target_abs]) != base_abs:
+        frappe.throw(_("Invalid file path: {0}").format(filename))
+
+    return target_abs
+
+
 def import_themes_from_json():
     theme_dir = frappe.get_app_path(
         "kanak_theme", "theme_data"
@@ -30,7 +46,7 @@ def import_themes_from_json():
         if not file.endswith(".json"):
             continue
 
-        path = os.path.join(theme_dir, file)
+        path = safe_join_path(theme_dir, file)
 
         with open(path, "r") as f:
             data = json.load(f)
@@ -40,7 +56,10 @@ def import_themes_from_json():
 
         doc = frappe.get_doc(data)
         doc.insert(ignore_permissions=True)
-    frappe.db.commit()
+    # Manual commit is required here: after_install runs inside the app install
+    # transaction, and these theme records must persist even if a later install
+    # step fails and rolls back.
+    frappe.db.commit()  # nosemgrep: frappe-manual-commit
 
 
 def create_system_settings_theme_field():
@@ -58,7 +77,10 @@ def create_system_settings_theme_field():
             "insert_after": "language"
         })
         custom_field.insert(ignore_permissions=True)
-        frappe.db.commit()
+        # Manual commit is required here: System Settings depends on this Custom
+        # Field existing, so it must persist independently of the install
+        # transaction's outcome.
+        frappe.db.commit()  # nosemgrep: frappe-manual-commit
 
 
 # def create_default_theme():

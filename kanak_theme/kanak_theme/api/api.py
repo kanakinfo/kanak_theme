@@ -146,7 +146,6 @@ def get_themes():
 def apply_theme(theme):
     user = frappe.session.user
     frappe.db.set_value("User", user, "theme", theme)
-    frappe.db.commit()
     return True
 
 @frappe.whitelist()
@@ -172,7 +171,6 @@ def create_note(title="", content="", x=0, y=0, width=250, height=200, color="#f
     doc.pinned = int(pinned)
     doc.visible = int(visible)
     doc.insert(ignore_permissions=True)
-    frappe.db.commit()
     return doc.as_dict()
 
 @frappe.whitelist()
@@ -196,7 +194,6 @@ def update_note(name, **kwargs):
             except:
                 pass
     doc.save(ignore_permissions=True)
-    frappe.db.commit()
     return doc.as_dict()
 
 @frappe.whitelist()
@@ -206,5 +203,4 @@ def delete_note(name):
     if doc.owner != user and not frappe.has_permission("Sticky Note", "delete"):
         frappe.throw(_("Not permitted"))
     doc.delete()
-    frappe.db.commit()
     return {"deleted": True}

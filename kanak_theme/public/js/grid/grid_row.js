@@ -1442,7 +1442,7 @@ export default class GridRow {
 			.toggle(!(this.grid.df && this.grid.df.cannot_delete_rows));
 
 		frappe.dom.freeze("", "dark grid-form");
-		if (cur_frm) cur_frm.cur_grid = this;
+		if (this.frm) this.frm.cur_grid = this;
 		this.wrapper.addClass("grid-row-open");
 		if (
 			!frappe.dom.is_element_in_viewport(this.wrapper) &&
@@ -1468,7 +1468,7 @@ export default class GridRow {
 			frappe.utils.scroll_to(this.row, true, 15);
 		}
 		this.refresh();
-		if (cur_frm) cur_frm.cur_grid = null;
+		if (this.frm) this.frm.cur_grid = null;
 		if (this.grid_form) {
 			this.grid_form.wrapper.css("display", "none");
 		}
