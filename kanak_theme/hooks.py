@@ -91,7 +91,14 @@ after_install = "kanak_theme.install.after_install"
 # ------------
 
 # before_uninstall = "kanak_theme.uninstall.before_uninstall"
+before_uninstall = "kanak_theme.install.before_uninstall"
 # after_uninstall = "kanak_theme.uninstall.after_uninstall"
+
+doc_events = {
+	"System Settings": {
+		"validate": "kanak_theme.install.validate",
+	},
+}
 
 # Integration Setup
 # ------------------
